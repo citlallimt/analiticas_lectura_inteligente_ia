@@ -68,7 +68,14 @@ Desarrollar una herramienta basada en Inteligencia Artificial y Procesamiento de
 
 ## 📊 Arquitectura del Sistema
 
-![Diagrama](Diagrama.png)
+<p align="center">
+  <img src="Diagrama.png" width="100%">
+</p>
+
+Este diagrama representa el flujo general del sistema desarrollado, desde la carga del documento hasta la generación del reporte de resultados mediante técnicas de Procesamiento de Lenguaje Natural (NLP) e Inteligencia Artificial. Cada etapa integra modelos especializados para el análisis del texto, la generación automática de preguntas y la evaluación semántica de las respuestas del usuario.
+
+---
+
 ## 🛠 Tecnologías
 
 - Python
