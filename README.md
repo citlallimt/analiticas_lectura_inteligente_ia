@@ -68,7 +68,7 @@ Desarrollar una herramienta basada en Inteligencia Artificial y Procesamiento de
 
 ## 📊 Arquitectura del Sistema
 
-![Diagrama](diagrama.png)
+![Diagrama](Diagrama.png)
 ## 🛠 Tecnologías
 
 - Python
