@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="banner.png alt="Banner del proyecto"
-  width="100%>
+  <img src="Banner.png" alt="Banner del proyecto" width="100%">
 </p>
 
   # 📖 Analíticas de Lectura Inteligente
