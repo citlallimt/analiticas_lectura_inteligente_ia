@@ -1,4 +1,9 @@
-# 📖 Analíticas de Lectura Inteligente
+<p align="center">
+  <img src="banner.png alt="Banner del proyecto"
+  width="100%>
+</p>
+
+  # 📖 Analíticas de Lectura Inteligente
 
 ### Potenciando el Aprendizaje con Inteligencia Artificial
 
