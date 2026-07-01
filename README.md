@@ -65,6 +65,10 @@ Desarrollar una herramienta basada en Inteligencia Artificial y Procesamiento de
 | RoBERTa QA | Extracción de respuestas |
 | Sentence Transformers | Evaluación semántica |
 | fast-langdetect | Detección del idioma |
+
+## 📊 Arquitectura del Sistema
+
+![Diagrama](diagrama.png)
 ## 🛠 Tecnologías
 
 - Python
