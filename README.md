@@ -16,7 +16,6 @@ Actualmente, muchos estudiantes presentan dificultades para comprender, analizar
 
 Este proyecto busca apoyar dicho proceso mediante una herramienta inteligente capaz de:
 
-Este proyecto busca apoyar dicho proceso mediante una herramienta inteligente capaz de:
 
 - Analizar documentos PDF.
 - Detectar automáticamente el idioma.
