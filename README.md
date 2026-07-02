@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Banner.png" alt="Banner del proyecto" width="100%">
+  <img src="assets/Banner.png" width="100%">
 </p>
 
   # 📖 Analíticas de Lectura Inteligente
@@ -69,12 +69,13 @@ Desarrollar una herramienta basada en Inteligencia Artificial y Procesamiento de
 
 ## 📊 Arquitectura del Sistema
 
+El  siguiente diagrama muestra el flujo completo del sistema desarrollado, desde la carga del documento hasta la generación del reporte final. Cada etapa representa un módulo del pipeline de Procesamiento de Lenguaje Natural (NLP) y los modelos de Inteligencia Artificial utilizados durante el análisis.
+
 <p align="center">
   <img src="Diagrama.png" width="100%">
 </p>
 
-Este diagrama representa el flujo general del sistema desarrollado, desde la carga del documento hasta la generación del reporte de resultados mediante técnicas de Procesamiento de Lenguaje Natural (NLP) e Inteligencia Artificial. Cada etapa integra modelos especializados para el análisis del texto, la generación automática de preguntas y la evaluación semántica de las respuestas del usuario.
-
+El sistema inicia con la carga del documento, realiza el preprocesamiento y la detección automática del idioma. Posteriormente ejecuta un pipeline de NLP que incluye tokenización, procesamiento lingüístico, extracción de palabras clave, modelado de temas y generación de resúmenes. Finalmente genera preguntas, analiza las respuestas del usuario mediante RoBERTa QA, calcula la similitud semántica utilizando Sentence Transformers y produce un reporte con métricas y analíticas del aprendizaje.
 ---
 
 ## 📂 Estructura del proyecto
@@ -82,13 +83,25 @@ Este diagrama representa el flujo general del sistema desarrollado, desde la car
 ```text
 analiticas_lectura_inteligente_ia
 │
-├── README.md                # Documentación principal
-├── LICENSE                  # Licencia MIT
-├── requirements.txt         # Dependencias del proyecto
-├── banner.png               # Banner principal
-├── docs/                    # Diagramas y documentación
-├── src/                     # Código fuente
-└── examples/                # Archivos de ejemplo
+├── README.md
+├── LICENSE
+├── requirements.txt
+│
+├── assets/
+│   ├── Banner.png
+│   └── Diagrama.png
+│
+├── src/
+│   ├── main.py
+│   ├── preprocessing.py
+│   ├── language_detector.py
+│   ├── topic_model.py
+│   ├── question_generator.py
+│   ├── answer_extractor.py
+│   ├── semantic_similarity.py
+│   └── report_generator.py
+│
+└── examples/
 ```
 
 ## 🛠 Tecnologías
