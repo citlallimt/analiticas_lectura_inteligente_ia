@@ -53,6 +53,7 @@ Desarrollar una herramienta basada en Inteligencia Artificial y Procesamiento de
 5. El usuario responde.
 6. La IA analiza las respuestas.
 7. Se genera un reporte con métricas.
+   
 ## 🧠 Arquitectura de IA
 
 | Modelo | Función |
@@ -75,6 +76,20 @@ Desarrollar una herramienta basada en Inteligencia Artificial y Procesamiento de
 Este diagrama representa el flujo general del sistema desarrollado, desde la carga del documento hasta la generación del reporte de resultados mediante técnicas de Procesamiento de Lenguaje Natural (NLP) e Inteligencia Artificial. Cada etapa integra modelos especializados para el análisis del texto, la generación automática de preguntas y la evaluación semántica de las respuestas del usuario.
 
 ---
+
+## 📂 Estructura del proyecto
+
+```text
+analiticas_lectura_inteligente_ia
+│
+├── README.md                # Documentación principal
+├── LICENSE                  # Licencia MIT
+├── requirements.txt         # Dependencias del proyecto
+├── banner.png               # Banner principal
+├── docs/                    # Diagramas y documentación
+├── src/                     # Código fuente
+└── examples/                # Archivos de ejemplo
+```
 
 ## 🛠 Tecnologías
 
