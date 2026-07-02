@@ -1,1 +1,4 @@
-Crear archivo src/report_generator.py
+"""
+Módulo encargado de generar el reporte final
+con métricas y analíticas del proceso.
+"""
