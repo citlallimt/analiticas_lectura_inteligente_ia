@@ -1,1 +1,4 @@
-Crear archivo principal src/language_detector.py 
+"""
+Módulo encargado de detectar el idioma del documento
+utilizando fast-langdetect.
+"""
