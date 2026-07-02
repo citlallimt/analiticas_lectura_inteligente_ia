@@ -1,1 +1,4 @@
-Crear archivo principal src/topic_model.py
+"""
+Módulo encargado de extraer palabras clave y detectar
+los temas principales del documento mediante YAKE y LDA.
+"""
