@@ -1,4 +1,11 @@
 """
 Módulo encargado de generar el reporte final
-con métricas y analíticas del proceso.
+con los resultados del análisis.
+
+Funciones:
+- Exportación de resultados.
+- Generación del archivo de salida.
 """
+
+import os
+from tkinter import Tk, filedialog
