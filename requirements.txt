@@ -1,0 +1,14 @@
+spacy
+fast-langdetect
+gensim
+yake
+textstat
+transformers
+sentence-transformers
+thefuzz
+numpy
+scikit-learn
+torch
+nltk
+scipy
+regex
