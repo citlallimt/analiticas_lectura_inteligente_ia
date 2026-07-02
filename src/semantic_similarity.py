@@ -1,1 +1,5 @@
-Crear archivo principal src/semantic_similarity.py
+"""
+Módulo encargado de calcular la similitud semántica
+entre la pregunta y la respuesta utilizando
+Sentence Transformers.
+"""
