@@ -5,17 +5,27 @@ utilizando fast-langdetect.
 
 from fast_langdetect import detect_language
 
-def detect_text_language(text):
+
+def detect_text_language(text: str) -> str:
     """
-    Detecta el idioma de un texto.
+    Detecta automáticamente el idioma de un texto.
 
-    Parámetros:
-        text (str): Texto a analizar.
+    Parámetros
+    ----------
+    text : str
+        Texto que será analizado.
 
-    Retorna:
-        str: Código del idioma detectado (es, en, etc.).
+    Retorna
+    -------
+    str
+        Código del idioma detectado (por ejemplo: 'es', 'en').
     """
 
-    language = detect_language(text)
+    try:
+        language = detect_language(text)
+        return language.lower()
 
-    return language.lower()
+    except Exception as error:
+        raise RuntimeError(
+            f"No fue posible detectar el idioma del texto: {error}"
+        )
