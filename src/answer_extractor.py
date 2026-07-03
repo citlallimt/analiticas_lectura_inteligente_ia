@@ -57,19 +57,3 @@ def extract_answers(text: str, questions: list):
     for index, question in enumerate(questions):
 
         result = qa_pipeline(
-            {
-                "question": question,
-                "context": text
-            }
-        )
-
-        qa_pairs.append(
-            {
-                "id": index,
-                "question": question,
-                "answer": result["answer"],
-                "score": round(result["score"], 4)
-            }
-        )
-
-    return qa_pairs
