@@ -8,17 +8,26 @@ Funciones:
 - Preparación del documento para NLP.
 """
 
-import spacy
-import textstat
-from transformers import pipeline, AutoTokenizer
 import warnings
 
-from language_detector import detect_text_language
+import spacy
+import textstat
+from transformers import AutoTokenizer, pipeline
 
 
 def load_text(file_path: str) -> str:
     """
     Lee un archivo de texto.
+
+    Parámetros
+    ----------
+    file_path : str
+        Ruta del archivo.
+
+    Retorna
+    -------
+    str
+        Texto del documento.
     """
 
     with open(file_path, "r", encoding="utf-8") as file:
@@ -27,8 +36,7 @@ def load_text(file_path: str) -> str:
 
 def load_spacy_model(language: str):
     """
-    Carga automáticamente el modelo de spaCy
-    correspondiente al idioma detectado.
+    Carga automáticamente el modelo de spaCy.
 
     Parámetros
     ----------
@@ -38,7 +46,7 @@ def load_spacy_model(language: str):
     Retorna
     -------
     Language
-        Modelo de spaCy cargado.
+        Modelo de spaCy.
     """
 
     if language == "es":
@@ -52,19 +60,6 @@ def load_spacy_model(language: str):
 def process_text(text: str, nlp):
     """
     Procesa el documento utilizando spaCy.
-
-    Parámetros
-    ----------
-    text : str
-        Texto original.
-
-    nlp :
-        Modelo de spaCy cargado.
-
-    Retorna
-    -------
-    Doc
-        Documento procesado.
     """
 
     return nlp(text)
@@ -72,18 +67,7 @@ def process_text(text: str, nlp):
 
 def get_stopwords(nlp):
     """
-    Obtiene las palabras vacías (stopwords)
-    del modelo de spaCy.
-
-    Parámetros
-    ----------
-    nlp
-        Modelo de spaCy.
-
-    Retorna
-    -------
-    set
-        Conjunto de stopwords.
+    Obtiene las stopwords del modelo spaCy.
     """
 
     return nlp.Defaults.stop_words
@@ -91,16 +75,7 @@ def get_stopwords(nlp):
 
 def calculate_text_metrics(text: str):
     """
-    Calcula las métricas básicas del documento.
-
-    Parámetros
-    ----------
-    text : str
-
-    Retorna
-    -------
-    dict
-        Número de palabras, oraciones y caracteres.
+    Calcula métricas básicas del documento.
     """
 
     return {
@@ -115,16 +90,7 @@ def calculate_text_metrics(text: str):
 
 def calculate_lexical_complexity(text: str):
     """
-    Calcula la complejidad léxica del documento.
-
-    Parámetros
-    ----------
-    text : str
-
-    Retorna
-    -------
-    float
-        Complejidad entre 0 y 100.
+    Calcula una aproximación de la complejidad léxica.
     """
 
     flesch = textstat.flesch_reading_ease(text)
@@ -135,3 +101,40 @@ def calculate_lexical_complexity(text: str):
     )
 
     return round(complexity, 2)
+
+
+def analyze_sentiment(text: str):
+    """
+    Analiza el sentimiento del documento.
+
+    Parámetros
+    ----------
+    text : str
+        Texto del documento.
+
+    Retorna
+    -------
+    dict
+        Etiqueta y confianza del modelo.
+    """
+
+    warnings.filterwarnings("ignore")
+
+    model_name = "cardiffnlp/twitter-xlm-roberta-base-sentiment"
+
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+    sentiment_pipeline = pipeline(
+        "sentiment-analysis",
+        model=model_name,
+        tokenizer=tokenizer,
+        truncation=True,
+        max_length=512
+    )
+
+    result = sentiment_pipeline(text)[0]
+
+    return {
+        "label": result["label"],
+        "score": round(result["score"], 4)
+    }
