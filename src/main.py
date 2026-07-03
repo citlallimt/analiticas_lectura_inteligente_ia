@@ -183,6 +183,20 @@ def main():
         print(
             f"Relevancia: {pair['relevance_score']}%"
         )
+
+    # =====================================================
+    # 11. Guardar reporte
+    # =====================================================
+
+    save_report(
+        input_file=input_file,
+        metrics=metrics,
+        complexity=complexity,
+        sentiment=sentiment,
+        keywords=keywords,
+        topics=topics,
+        qa_pairs=qa_pairs
+    )
     
     print("\nProcesamiento finalizado.")
 
