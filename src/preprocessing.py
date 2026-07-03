@@ -68,3 +68,70 @@ def process_text(text: str, nlp):
     """
 
     return nlp(text)
+
+
+def get_stopwords(nlp):
+    """
+    Obtiene las palabras vacías (stopwords)
+    del modelo de spaCy.
+
+    Parámetros
+    ----------
+    nlp
+        Modelo de spaCy.
+
+    Retorna
+    -------
+    set
+        Conjunto de stopwords.
+    """
+
+    return nlp.Defaults.stop_words
+
+
+def calculate_text_metrics(text: str):
+    """
+    Calcula las métricas básicas del documento.
+
+    Parámetros
+    ----------
+    text : str
+
+    Retorna
+    -------
+    dict
+        Número de palabras, oraciones y caracteres.
+    """
+
+    return {
+        "word_count": textstat.lexicon_count(
+            text,
+            removepunct=True
+        ),
+        "sentence_count": textstat.sentence_count(text),
+        "character_count": len(text)
+    }
+
+
+def calculate_lexical_complexity(text: str):
+    """
+    Calcula la complejidad léxica del documento.
+
+    Parámetros
+    ----------
+    text : str
+
+    Retorna
+    -------
+    float
+        Complejidad entre 0 y 100.
+    """
+
+    flesch = textstat.flesch_reading_ease(text)
+
+    complexity = max(
+        0,
+        min(100, 100 - flesch)
+    )
+
+    return round(complexity, 2)
