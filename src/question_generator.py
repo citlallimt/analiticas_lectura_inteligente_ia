@@ -144,12 +144,18 @@ def generate_questions(text: str, target_questions: int = 5):
 
     chunks = split_text(text)
 
+    # Evita división entre cero si el documento está vacío.
+    if not chunks:
+        return []
+
     questions = []
 
     num_beams = 8
     num_beam_groups = 4
 
-    questions_per_chunk = math.ceil(target_questions / len(chunks))
+    questions_per_chunk = math.ceil(
+        target_questions / len(chunks)
+    )
 
     num_return_sequences = min(
         math.ceil(questions_per_chunk * 2.5),
@@ -185,7 +191,18 @@ def generate_questions(text: str, target_questions: int = 5):
             skip_special_tokens=True
         )
 
-        questions.extend(generated)
+        for question in generated:
+
+            question = re.sub(
+                r"^(question|pregunta):\s*",
+                "",
+                question,
+                flags=re.IGNORECASE
+            ).strip()
+
+            # Evita preguntas demasiado cortas.
+            if len(question.split()) > 3:
+                questions.append(question)
 
     questions = remove_duplicate_questions(questions)
 
