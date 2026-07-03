@@ -13,6 +13,11 @@ from transformers import pipeline
 def load_qa_model():
     """
     Carga el modelo de Question Answering.
+
+    Retorna
+    -------
+    pipeline
+        Pipeline de Hugging Face para QA.
     """
 
     model_name = "PlanTL-GOB-ES/roberta-base-bne-sqac"
@@ -24,3 +29,47 @@ def load_qa_model():
     )
 
     return qa_pipeline
+
+
+def extract_answers(text: str, questions: list):
+    """
+    Extrae automáticamente las respuestas para
+    una lista de preguntas.
+
+    Parámetros
+    ----------
+    text : str
+        Documento original.
+
+    questions : list
+        Lista de preguntas.
+
+    Retorna
+    -------
+    list
+        Lista de pares pregunta-respuesta.
+    """
+
+    qa_pipeline = load_qa_model()
+
+    qa_pairs = []
+
+    for index, question in enumerate(questions):
+
+        result = qa_pipeline(
+            {
+                "question": question,
+                "context": text
+            }
+        )
+
+        qa_pairs.append(
+            {
+                "id": index,
+                "question": question,
+                "answer": result["answer"],
+                "score": round(result["score"], 4)
+            }
+        )
+
+    return qa_pairs
