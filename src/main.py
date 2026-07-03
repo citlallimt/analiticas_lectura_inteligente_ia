@@ -38,66 +38,94 @@ def main():
     print("ANALÍTICAS DE LECTURA INTELIGENTE")
     print("=" * 60)
 
-    # Ruta del documento
-    input_file = "documento.txt"
+    # =====================================================
+    # 1. Lectura del documento
+    # =====================================================
 
-    # -------------------------------------------------
-    # 1. Leer documento
-    # -------------------------------------------------
+    input_file = "documento.txt"
 
     text = load_text(input_file)
 
-    # -------------------------------------------------
-    # 2. Detectar idioma
-    # -------------------------------------------------
+    print("Documento cargado correctamente.")
+
+    # =====================================================
+    # 2. Detección del idioma
+    # =====================================================
 
     language = detect_text_language(text)
 
     print(f"Idioma detectado: {language}")
 
-    # -------------------------------------------------
-    # 3. Cargar modelo spaCy
-    # -------------------------------------------------
+    # =====================================================
+    # 3. Procesamiento con spaCy
+    # =====================================================
 
     nlp = load_spacy_model(language)
-
-    # -------------------------------------------------
-    # 4. Procesar documento
-    # -------------------------------------------------
 
     doc = process_text(text, nlp)
 
     print("Documento procesado correctamente.")
 
-    # -------------------------------------------------
-    # 5. Métricas
-    # -------------------------------------------------
+    # =====================================================
+    # 4. Métricas del documento
+    # =====================================================
 
     metrics = calculate_text_metrics(text)
 
-    print("\nMétricas del documento:")
+    print("\nMétricas del documento")
+
     print(metrics)
 
-    # -------------------------------------------------
-    # 6. Complejidad léxica
-    # -------------------------------------------------
+    # =====================================================
+    # 5. Complejidad léxica
+    # =====================================================
 
     complexity = calculate_lexical_complexity(text)
 
     print(f"\nComplejidad léxica: {complexity}")
 
-    # -------------------------------------------------
-    # 7. Sentimiento
-    # -------------------------------------------------
+    # =====================================================
+    # 6. Análisis de sentimiento
+    # =====================================================
 
     sentiment = analyze_sentiment(text)
 
-    print("\nAnálisis de sentimiento:")
+    print("\nSentimiento del documento")
+
     print(sentiment)
 
-    # -------------------------------------------------
-    # Las siguientes fases se irán integrando
-    # -------------------------------------------------
+    # =====================================================
+    # 7. Análisis temático
+    # =====================================================
+
+    print("\n" + "=" * 60)
+    print("ANÁLISIS TEMÁTICO")
+    print("=" * 60)
+
+    tokens = extract_tokens(doc)
+
+    keywords = extract_keywords(
+        text,
+        language
+    )
+
+    print("\nPalabras clave:")
+
+    for keyword in keywords:
+        print(f"- {keyword}")
+
+    dictionary, corpus, lda_model = build_lda_model(tokens)
+
+    topics = get_topics(lda_model)
+
+    print("\nTópicos detectados:")
+
+    for topic, words in topics.items():
+        print(f"{topic}: {words}")
+
+    # =====================================================
+    # Las siguientes etapas se integrarán después
+    # =====================================================
 
     print("\nProcesamiento finalizado.")
 
