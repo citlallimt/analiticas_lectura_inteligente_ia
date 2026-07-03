@@ -3,9 +3,9 @@ Módulo encargado de generar el reporte final
 con los resultados del análisis.
 
 Funciones:
-- Selección de la carpeta de salida.
-- Generación del archivo de resultados.
-- Exportación del reporte.
+- Selección de carpeta.
+- Exportación de resultados.
+- Generación del archivo de salida.
 """
 
 import os
@@ -20,84 +20,130 @@ def select_output_directory():
     Retorna
     -------
     str
-        Ruta de la carpeta seleccionada.
+        Ruta seleccionada.
     """
 
     root = Tk()
     root.withdraw()
 
     directory = filedialog.askdirectory(
-        title="Selecciona la carpeta para guardar el reporte"
+        title="Selecciona la carpeta donde guardar el reporte"
     )
 
     return directory
 
 
-def save_report(qa_pairs: list, input_filename: str):
+def save_report(
+    input_file: str,
+    metrics: dict,
+    complexity: float,
+    sentiment: dict,
+    keywords: list,
+    topics: dict,
+    qa_pairs: list
+):
     """
-    Guarda el reporte final en un archivo de texto.
+    Guarda el reporte completo en un archivo TXT.
 
     Parámetros
     ----------
-    qa_pairs : list
-        Lista de preguntas y respuestas.
+    input_file : str
+        Documento analizado.
 
-    input_filename : str
-        Nombre del documento procesado.
+    metrics : dict
+        Métricas del documento.
+
+    complexity : float
+        Complejidad léxica.
+
+    sentiment : dict
+        Resultado del análisis de sentimiento.
+
+    keywords : list
+        Palabras clave.
+
+    topics : dict
+        Tópicos encontrados.
+
+    qa_pairs : list
+        Preguntas, respuestas y relevancia.
     """
 
-    output_directory = select_output_directory()
+    directory = select_output_directory()
 
-    if not output_directory:
-        print("No se seleccionó ninguna carpeta.")
+    if not directory:
+
+        print("No se seleccionó carpeta.")
+
         return
 
+    filename = os.path.basename(input_file)
+
     output_file = os.path.join(
-        output_directory,
-        f"QA_{os.path.basename(input_filename)}"
+        directory,
+        f"Reporte_{filename}"
     )
 
-    with open(output_file, "w", encoding="utf-8") as file:
+    with open(
+        output_file,
+        "w",
+        encoding="utf-8"
+    ) as file:
 
-        file.write(
-            f"Resultados del documento: {input_filename}\n"
-        )
+        file.write("=" * 80 + "\n")
+        file.write("ANALÍTICAS DE LECTURA INTELIGENTE\n")
+        file.write("=" * 80 + "\n\n")
 
-        file.write("=" * 80)
+        file.write("MÉTRICAS\n")
+        file.write(str(metrics))
         file.write("\n\n")
 
-        for index, pair in enumerate(qa_pairs):
+        file.write(
+            f"Complejidad léxica: {complexity}\n\n"
+        )
+
+        file.write(
+            f"Sentimiento: {sentiment}\n\n"
+        )
+
+        file.write("PALABRAS CLAVE\n")
+
+        for keyword in keywords:
+            file.write(f"- {keyword}\n")
+
+        file.write("\n")
+
+        file.write("TÓPICOS\n")
+
+        for topic, words in topics.items():
+            file.write(f"{topic}: {words}\n")
+
+        file.write("\n")
+
+        file.write("PREGUNTAS Y RESPUESTAS\n\n")
+
+        for pair in qa_pairs:
 
             file.write(
-                f"Pregunta {index+1}\n"
+                f"Pregunta {pair['id'] + 1}\n"
+            )
+
+            file.write(pair["question"] + "\n\n")
+
+            file.write(
+                "Respuesta:\n"
+            )
+
+            file.write(pair["answer"] + "\n\n")
+
+            file.write(
+                f"Score QA: {pair['score']}\n"
             )
 
             file.write(
-                pair["question"] + "\n\n"
+                f"Relevancia: {pair['relevance_score']}%\n"
             )
 
-            file.write(
-                f"Respuesta {index+1}\n"
-            )
+            file.write("-" * 80 + "\n")
 
-            file.write(
-                pair["answer"] + "\n\n"
-            )
-
-            if "score" in pair:
-
-                file.write(
-                    f"Confianza QA: {pair['score']}\n"
-                )
-
-            if "semantic_similarity" in pair:
-
-                file.write(
-                    f"Similitud semántica: "
-                    f"{pair['semantic_similarity']}%\n"
-                )
-
-            file.write("-" * 80)
-            file.write("\n\n")
-
-    print(f"Reporte guardado en:\n{output_file}")
+    print(f"\nReporte guardado en:\n{output_file}")
