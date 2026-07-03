@@ -16,11 +16,6 @@ def load_similarity_model():
     """
     Carga el modelo utilizado para calcular
     la similitud semántica.
-
-    Retorna
-    -------
-    SentenceTransformer
-        Modelo de embeddings.
     """
 
     model = SentenceTransformer(
@@ -32,8 +27,8 @@ def load_similarity_model():
 
 def calculate_similarity(qa_pairs: list):
     """
-    Calcula la similitud semántica entre cada
-    pregunta y su respuesta.
+    Calcula la similitud semántica entre
+    cada pregunta y su respuesta.
 
     Parámetros
     ----------
@@ -43,7 +38,7 @@ def calculate_similarity(qa_pairs: list):
     Retorna
     -------
     list
-        Lista con la relevancia semántica agregada.
+        Lista actualizada con la relevancia semántica.
     """
 
     model = load_similarity_model()
@@ -68,23 +63,29 @@ def calculate_similarity(qa_pairs: list):
         convert_to_tensor=True
     )
 
-    cosine_scores = util.pytorch_cos_sim(
+    similarity_matrix = util.pytorch_cos_sim(
         question_embeddings,
         answer_embeddings
     )
 
     results = []
 
-    for index, pair in enumerate(qa_pairs):
+    for i, pair in enumerate(qa_pairs):
 
-        similarity = cosine_scores[index][index].item()
+        similarity = similarity_matrix[i][i].item()
 
-        relevance = round(
-            ((similarity + 1) / 2) * 100,
-            2
+        relevance = max(
+            0,
+            min(
+                100,
+                ((similarity + 1) / 2) * 100
+            )
         )
 
-        pair["semantic_similarity"] = relevance
+        pair["relevance_score"] = round(
+            relevance,
+            2
+        )
 
         results.append(pair)
 
