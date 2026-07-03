@@ -141,6 +141,49 @@ def main():
     for i, question in enumerate(questions, start=1):
         print(f"{i}. {question}")
 
+    # =====================================================
+    # 9. Extracción automática de respuestas
+    # =====================================================
+
+    print("\n" + "=" * 60)
+    print("EXTRACCIÓN DE RESPUESTAS")
+    print("=" * 60)
+
+    qa_pairs = extract_answers(
+        text,
+        questions
+    )
+
+    for pair in qa_pairs:
+
+        print(f"\nPregunta {pair['id'] + 1}:")
+        print(pair["question"])
+
+        print("Respuesta:")
+        print(pair["answer"])
+
+        print(f"Score QA: {pair['score']}")
+
+    # =====================================================
+    # 10. Similitud semántica
+    # =====================================================
+
+    print("\n" + "=" * 60)
+    print("SIMILITUD SEMÁNTICA")
+    print("=" * 60)
+
+    qa_pairs = calculate_similarity(qa_pairs)
+
+    for pair in qa_pairs:
+
+        print(
+            f"\nPregunta {pair['id'] + 1}"
+        )
+
+        print(
+            f"Relevancia: {pair['relevance_score']}%"
+        )
+    
     print("\nProcesamiento finalizado.")
 
 
