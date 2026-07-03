@@ -124,8 +124,22 @@ def main():
         print(f"{topic}: {words}")
 
     # =====================================================
-    # Las siguientes etapas se integrarán después
+    # 8. Generación automática de preguntas
     # =====================================================
+
+    print("\n" + "=" * 60)
+    print("GENERACIÓN DE PREGUNTAS")
+    print("=" * 60)
+
+    questions = generate_questions(
+        text,
+        target_questions=5
+    )
+
+    print("\nPreguntas generadas:")
+
+    for i, question in enumerate(questions, start=1):
+        print(f"{i}. {question}")
 
     print("\nProcesamiento finalizado.")
 
