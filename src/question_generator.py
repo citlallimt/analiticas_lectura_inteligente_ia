@@ -79,3 +79,71 @@ def split_text(text: str, max_chunk_tokens: int = 450):
         chunks.append(current_chunk.strip())
 
     return chunks
+
+
+def generate_questions(text: str, target_questions: int = 5):
+    """
+    Genera preguntas automáticamente a partir del documento.
+
+    Parámetros
+    ----------
+    text : str
+        Texto del documento.
+
+    target_questions : int
+        Número aproximado de preguntas que se desea generar.
+
+    Retorna
+    -------
+    list
+        Lista de preguntas generadas.
+    """
+
+    model, tokenizer = load_question_generator()
+
+    chunks = split_text(text)
+
+    questions = []
+
+    num_beams = 8
+    num_beam_groups = 4
+
+    questions_per_chunk = math.ceil(target_questions / len(chunks))
+
+    num_return_sequences = min(
+        math.ceil(questions_per_chunk * 2.5),
+        num_beams
+    )
+
+    for chunk in chunks:
+
+        input_text = "question generation: " + chunk
+
+        inputs = tokenizer(
+            input_text,
+            return_tensors="pt",
+            max_length=512,
+            truncation=True,
+            padding="longest"
+        )
+
+        outputs = model.generate(
+            input_ids=inputs["input_ids"],
+            attention_mask=inputs["attention_mask"],
+            max_length=128,
+            num_beams=num_beams,
+            num_beam_groups=num_beam_groups,
+            diversity_penalty=0.5,
+            early_stopping=True,
+            no_repeat_ngram_size=2,
+            num_return_sequences=num_return_sequences
+        )
+
+        generated = tokenizer.batch_decode(
+            outputs,
+            skip_special_tokens=True
+        )
+
+        questions.extend(generated)
+
+    return questions
