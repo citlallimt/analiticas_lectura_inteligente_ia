@@ -16,6 +16,16 @@ def extract_tokens(doc):
     """
     Extrae los tokens más relevantes del documento
     para el análisis de tópicos.
+
+    Parámetros
+    ----------
+    doc : spaCy Doc
+        Documento procesado.
+
+    Retorna
+    -------
+    list
+        Lista de tokens normalizados.
     """
 
     allowed_pos = {"NOUN", "PROPN", "VERB", "ADJ"}
@@ -35,6 +45,19 @@ def extract_tokens(doc):
 def extract_keywords(text: str, language: str):
     """
     Extrae las palabras clave utilizando YAKE.
+
+    Parámetros
+    ----------
+    text : str
+        Texto del documento.
+
+    language : str
+        Idioma detectado.
+
+    Retorna
+    -------
+    list
+        Lista de palabras clave.
     """
 
     extractor = yake.KeywordExtractor(
@@ -52,7 +75,20 @@ def extract_keywords(text: str, language: str):
 
 def build_lda_model(tokens: list, num_topics: int = 4):
     """
-    Construye el modelo LDA.
+    Construye un modelo LDA.
+
+    Parámetros
+    ----------
+    tokens : list
+        Lista de tokens.
+
+    num_topics : int
+        Número de tópicos.
+
+    Retorna
+    -------
+    tuple
+        Diccionario, corpus y modelo LDA.
     """
 
     dictionary = Dictionary([tokens])
@@ -76,13 +112,38 @@ def build_lda_model(tokens: list, num_topics: int = 4):
     return dictionary, corpus, lda_model
 
 
-def get_topics(lda_model, num_topics=4):
+def get_topics(lda_model, num_topics: int = 4, num_words: int = 7):
     """
-    Obtiene los tópicos generados por el modelo LDA.
+    Obtiene los tópicos principales generados por LDA.
+
+    Parámetros
+    ----------
+    lda_model
+        Modelo LDA entrenado.
+
+    num_topics : int
+        Número de tópicos.
+
+    num_words : int
+        Número de palabras por tópico.
+
+    Retorna
+    -------
+    dict
+        Diccionario con los tópicos principales.
     """
 
-    return lda_model.show_topics(
+    topics = lda_model.show_topics(
         num_topics=num_topics,
-        num_words=7,
+        num_words=num_words,
         formatted=False
     )
+
+    formatted_topics = {}
+
+    for index, topic in topics:
+        formatted_topics[f"topic_{index}"] = ", ".join(
+            word for word, score in topic
+        )
+
+    return formatted_topics
