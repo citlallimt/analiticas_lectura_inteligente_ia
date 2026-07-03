@@ -4,6 +4,7 @@ a partir del contenido del documento utilizando el modelo T5.
 
 Funciones:
 - Carga del modelo T5.
+- División del documento en fragmentos.
 - Generación automática de preguntas.
 - Eliminación de preguntas repetidas.
 """
@@ -81,6 +82,46 @@ def split_text(text: str, max_chunk_tokens: int = 450):
     return chunks
 
 
+def remove_duplicate_questions(
+    questions: list,
+    similarity_threshold: int = 85
+):
+    """
+    Elimina preguntas muy similares utilizando
+    comparación difusa (TheFuzz).
+
+    Parámetros
+    ----------
+    questions : list
+        Lista de preguntas generadas.
+
+    similarity_threshold : int
+        Porcentaje máximo permitido de similitud.
+
+    Retorna
+    -------
+    list
+        Lista de preguntas sin duplicados.
+    """
+
+    filtered_questions = []
+
+    for question in questions:
+
+        is_duplicate = any(
+            fuzz.ratio(
+                question.lower(),
+                existing.lower()
+            ) > similarity_threshold
+            for existing in filtered_questions
+        )
+
+        if not is_duplicate:
+            filtered_questions.append(question)
+
+    return filtered_questions
+
+
 def generate_questions(text: str, target_questions: int = 5):
     """
     Genera preguntas automáticamente a partir del documento.
@@ -146,4 +187,6 @@ def generate_questions(text: str, target_questions: int = 5):
 
         questions.extend(generated)
 
-    return questions
+    questions = remove_duplicate_questions(questions)
+
+    return questions[:target_questions]
