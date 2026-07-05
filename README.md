@@ -167,12 +167,14 @@ La aplicación cuenta con una interfaz gráfica que permite cargar documentos, e
   <img src="assets/interfazGrafica.jpeg" width="90%">
 </p>
 
-## 🖥️ Interfaz del sistema
+## 📄 Reporte generado
 
-La aplicación cuenta con una interfaz gráfica que permite cargar documentos, ejecutar el análisis completo y visualizar cada una de las fases del procesamiento.
+Al finalizar el análisis, el sistema genera automáticamente un archivo de texto (.txt) que reúne los resultados obtenidos durante todo el proceso.
+
+El reporte incluye las preguntas elaboradas automáticamente, las respuestas extraídas del documento y los indicadores de evaluación, como la puntuación de confianza y la relevancia semántica. Este recurso incrementa la portabilidad y la aplicabilidad práctica del prototipo, ya que facilita el almacenamiento, la consulta y la integración de la información en otros medios digitales o impresos.
 
 <p align="center">
-  <img src="assets/interfazGrafica.jpeg" width="90%">
+  <img src="assets/Reporte.jpeg" width="90%">
 </p>
 
   
