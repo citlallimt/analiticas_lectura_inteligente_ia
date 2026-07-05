@@ -2,6 +2,14 @@
   <img src="assets/Banner.png" width="100%">
 </p>
 
+<h1 align="center">
+📖 Analíticas de Lectura Inteligente
+</h1>
+
+<p align="center">
+Potenciando el Aprendizaje con Inteligencia Artificial
+</p>
+
   # 📖 Analíticas de Lectura Inteligente
 
 ### Potenciando el Aprendizaje con Inteligencia Artificial
@@ -89,7 +97,9 @@ analiticas_lectura_inteligente_ia
 │
 ├── assets/
 │   ├── Banner.png
-│   └── Diagrama.png
+│   ├── Diagrama.png
+│   ├── interfazGrafica.jpeg
+│   └── Reporte.jpeg
 │
 ├── src/
 │   ├── main.py
@@ -152,6 +162,23 @@ El sistema produce automáticamente:
 - Respuestas automáticas
 - Similitud semántica
 - Reporte TXT
+
+  ## 🖥️ Interfaz del sistema
+
+La aplicación cuenta con una interfaz gráfica que permite cargar documentos, ejecutar el análisis completo y visualizar cada una de las fases del procesamiento.
+
+<p align="center">
+  <img src="assets/interfazGrafica.jpeg" width="90%">
+</p>
+
+## 🖥️ Interfaz del sistema
+
+La aplicación cuenta con una interfaz gráfica que permite cargar documentos, ejecutar el análisis completo y visualizar cada una de las fases del procesamiento.
+
+<p align="center">
+  <img src="assets/interfazGrafica.jpeg" width="90%">
+</p>
+
   
 ## 📄 Licencia
 
