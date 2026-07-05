@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=![Banner](assets/Banner.png) width="100%">
+  <img src="assets/Banner.png" width="100%">
 </p>
 
   # 📖 Analíticas de Lectura Inteligente
@@ -72,7 +72,7 @@ Desarrollar una herramienta basada en Inteligencia Artificial y Procesamiento de
 El  siguiente diagrama muestra el flujo completo del sistema desarrollado, desde la carga del documento hasta la generación del reporte final. Cada etapa representa un módulo del pipeline de Procesamiento de Lenguaje Natural (NLP) y los modelos de Inteligencia Artificial utilizados durante el análisis.
 
 <p align="center">
-  <img src=![Diagrama](assets/Diagrama.png) width="100%">
+  <img src= "assets/Diagrama.png" width="100%">
 </p>
 
 El sistema inicia con la carga del documento, realiza el preprocesamiento y la detección automática del idioma. Posteriormente ejecuta un pipeline de NLP que incluye tokenización, procesamiento lingüístico, extracción de palabras clave, modelado de temas y generación de resúmenes. Finalmente genera preguntas, analiza las respuestas del usuario mediante RoBERTa QA, calcula la similitud semántica utilizando Sentence Transformers y produce un reporte con métricas y analíticas del aprendizaje.
