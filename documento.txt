@@ -1,0 +1,50 @@
+Un vistazo al sueño humano de la creación
+
+Cuando en los años cuarenta se pusieron a funcionar las primeras computadoras (esos roperos de metal, llenos de bulbos) se les llamó “cerebros electrónicos”, ya que podían hacer sumas. Esto hizo imaginar a muchos: “Mañana las máquinas conversarán con nosotros”. Y entonces el cine, los dibujos animados y la televisión se poblaron de robots “inteligentísimos”
+—aunque de movimientos algo torpes— que acompañaban a los humanos en toda clase de mundos. Mientras los alumnos de cibernética seguían perforando tarjetas, en el cine la computadora HAL se ponía paranoica y tomaba la decisión de asesinar a los astronautas de la película 2001, Odisea del Espacio.
+
+La industria de las computadoras no dejó de evolucionar y, de pronto, aquellos enormes aparatos con grandes cintas de carrete se volvieron pequeños y mucho más fáciles de operar. Un día ya tenían un monitor y un teclado para comunicarnos con sus circuitos. Al día siguiente aparecieron en nuestras casas las computadoras personales y hoy están por todos lados, volviéndose indispensables. Los niños de hoy viven en un mundo que, por lo menos en parte, la ciencia ficción imaginó hace 50 años.
+
+¿A nuestra imagen y semejanza?
+La palabra robot, acuñada en 1921 por el escritor checo Karel Capek, ya ha dejado de ser sinónimo de androides metálicos que van moviendo sus brazos como tentáculos, mientras avanzan sobre sus rueditas por el planeta de las Amazonas Sicodélicas. Los robots serán parte de nuestra vida cotidiana.
+
+Ya comienzan a serlo. En el siglo XX, el ser humano intenta reproducir el antiguo mito de la creación. Así como, según la Biblia, Dios creó a Adán y a Eva para no estar solo, ahora nosotros quisiéramos crear compañeros a nuestra imagen y semejanza. ¿Pero, de qué tipo? Que nos sean útiles y podamos interactuar con ellos de una forma cercana, casi natural; por eso se desea poner un cerebro artificial dentro de un cuerpo que imite lo mejor posible al nuestro. Finalmente somos como tristes Gepetos soñando con darle vida a un muñeco de madera para no sentirnos tan solos. Procurando ese sueño, el industrial estadounidense Joe Engelberg construyó un prototipo en los años cincuenta, y en la década siguiente vendió su primer robot útil. Pero realmente los robots dejaron de ser ficción en los años ochenta, cuando brazos gigantes que se movían obedeciendo un programa predeterminado, desplazaron a los obreros en las fábricas automotrices de Japón. Y aunque la robótica tiene el objetivo de poner a las máquinas a trabajar en todas las áreas posibles, esto es caro y complicado.
+
+En los Estados Unidos han logrado crear un modelo que es capaz de caminar, captar el movimiento de una pelota en el aire y cacharla con su mano mecánica. Sin embargo, para ejecutar un movimiento tan sencillo, el costoso robot (que asemeja más a una maraña de alambres y pistones hidráulicos que a un humano) está conectado a varias computadoras que trabajan a su máxima capacidad intentando coordinar lo que detectan los “ojos” (varias cámaras de video) y el movimiento del brazo y la mano.
+
+Aunque es cierto que Mike —otro robot acoplado a una lavadora rodante que limpia, pule y abrillanta pisos— es aún tan caro que cuesta menos tener un empleado que lo haga, no siempre será así. Un día, la producción en masa hará a los robots baratos. Si algunos tendrán una figura semejante a la nuestra, está por verse. Lo que parece más factible es que sus cerebros electrónicos tengan algún grado de inteligencia.
+
+La inteligencia artificial ¿Hacia dónde nos lleva?
+
+¿Puede la inteligencia ser artificial?
+La inteligencia artificial (IA) puede definirse como el medio por el cual las computadoras, los robots y otros dispositivos realizan tareas que normalmente requieren de la inteligencia humana. Por ejemplo, la resolución de cierto tipo de problemas, la capacidad de discriminar entre distintos objetos o el responder a órdenes verbales. La IA agrupa un conjunto de técnicas que, mediante circuitos electrónicos y programas avanzados de computadora, busca imitar procedimientos similares a los procesos inductivos y deductivos del cerebro humano. Se basa en la investigación de las redes neuronales humanas y, a partir de ahí, busca copiar electrónicamente el funcionamiento del cerebro.
+
+El avance en la investigación de las redes neuronales va ganando terreno a una velocidad espectacular. Entre sus aplicaciones destaca la poderosa computadora Deep Blue, que puede vencer a cualquier jugador de ajedrez: no sólo tiene gran cantidad de jugadas programadas, sino que aprende de su adversario, por lo que se va volviendo capaz de adelantarse a las decisiones de su enemigo y hundir sus estrategias antes de que prosperen.
+
+Esas redes también se han usado en los autos robot, que pueden circular por las autopistas a una velocidad normal con un excelente margen de seguridad, y de hecho han cruzado la Unión Americana de costa a costa sin que el conductor tuviera que tocar el volante o los pedales. Persisten dos problemitas: la cajuela continúa atiborrada de equipo y cuestan un dineral. Pero siguiendo esta línea de avance, es posible que en la próxima década sea común que en la central de autobuses una máquina pregunte al pasajero si desea viajar en un autobús conducido por un humano o guiado por computadora; este último servicio será más seguro y por lo tanto más caro. Se espera que en poco tiempo, imitando el funcionamiento de nuestro cerebro, las computadoras ya no tendrán un gran procesador, sino miles (y más adelante millones) de pequeños procesadores totalmente interconectados entre sí, lo que permitirá la maravillosa capacidad de aprender a través de experiencias recogidas por los “sentidos” de la máquina (cámaras de video, micrófonos, etcétera).
+
+A la vanguardia de la IA
+
+Entrevista con el doctor Ismael Espinosa Espinosa.
+
+El doctor Ismael Espinosa me abre sonriente las puertas del Laboratorio de Cibernética de la Facultad de Ciencias, de la UNAM. Son las nueve de la mañana en punto. Nos concede la entrevista en su despacho, saturado de libros, imágenes de paisajes futuristas y uno que otro robot de juguete.
+
+¿Qué sueñan los que ahora están a la vanguardia de la inteligencia artificial?
+
+—Creo que el hombre desea, desde hace mucho, a un amigo que lo acompañe en su viaje por el cosmos. Hace milenios se inventaron las marionetas, después los androides animados por complejos mecanismos de relojería, como el famoso jugador turco de ajedrez, que incluso le ganó a Napoleón una partida (años después se descubrió que en su interior había estado escondido un enano). Los robots del futuro harán que los prototipos actuales se parezcan a aquellos llenos de engranes del siglo XVIII.
+
+¿Y cómo serán esos robots?
+
+—Quizá sean robots biológicos. Definitivamente la clonación es un fuerte competidor de la robótica como la conocemos. Ya se puede clonar fibra muscular mucho más fuerte que la nuestra, u órganos internos tan complejos como el corazón.
+
+¿Se puede clonar un cerebro?
+
+—Aún no, pero ya trabajamos en las redes neuronales, que intentan ser la copia electrónica del funcionamiento de un cerebro. Actualmente usamos redes pequeñas, pues cuando éstas son muy complejas, se pierde el control y ya no sabemos exactamente qué está ocurriendo ahí dentro.
+
+¿Qué diferencia existe entre las redes neuronales y las computadoras actuales?
+
+—Mucha. Las redes neuronales están conectadas entre sí de manera que la información no se almacena en un solo lugar, sino que está repartida, y cada neurona puede activar o inhibir el funcionamiento de las otras. Esto quiere decir que si la computadora recibe un golpe que destruya una parte de la red, ésta puede seguir funcionando. Pero lo que se busca es reproducir la capacidad de aprender.
+
+¿Cómo va el estudio de la robótica en México?
+
+—Un poco atrasado. Las redes neuronales comenzaron a usarse desde los años 60, pero entonces, cuando yo traje ese concepto a México y me tildaron de loco, ni siquiera me dieron acceso a las computadoras que se tenían, así que perdimos muchos años. Ahora, que ya se sabe qué son y qué alcances tienen, todos quieren saber de redes neuronales. Por otro lado, la robótica es una ciencia muy compleja, que necesita ingenieros en computación, ingenieros mecánicos y electrónicos, matemáticos y hasta expertos en fisiología. Desarrollar un robot requiere de equipos multidisciplinarios que no siempre son fáciles de armar. Finalmente, sólo quisiera agregar que por más que avancemos en el campo de la inteligencia artificial, siempre sentiremos que hay una especie de enano escondido dentro de los robots.

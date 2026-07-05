@@ -1,170 +1,108 @@
 """
 Módulo encargado de la generación automática de preguntas
-a partir del contenido del documento utilizando el modelo T5.
+con soporte multilingüe dinámico basado en el idioma detectado.
 
 Funciones:
-- Carga del modelo T5.
+- Carga dinámica del modelo según el idioma.
 - División del documento en fragmentos.
 - Generación automática de preguntas.
 - Eliminación de preguntas repetidas.
 """
 
-from transformers import T5ForConditionalGeneration
-from transformers import T5TokenizerFast
+from transformers import AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer
 from thefuzz import fuzz
 import re
 import math
 
 
-def load_question_generator():
+def load_question_generator(lang: str = "es"):
     """
-    Carga el modelo T5 utilizado para la generación automática
-    de preguntas.
+    Carga dinámicamente un modelo de generación de preguntas abierto
+    basado en el idioma detectado, evitando errores de autenticación 401.
+
+    Parámetros
+    ----------
+    lang : str
+        Código del idioma detectado (ej. 'es', 'en').
 
     Retorna
     -------
     tuple
-        Modelo y tokenizer.
+        Modelo y tokenizer correspondientes.
     """
+    # Selección dinámica de modelos públicos y libres de candados 401
+    if lang == "es":
+        model_name = "mrm8488/bert2bert-spanish-question-generation"
+    else:
+        # Modelo estándar abierto para inglés y otros idiomas
+        model_name = "valhalla/t5-base-qg-hl"
 
-    model_name = "valhalla/t5-base-qg-hl"
-
-    model = T5ForConditionalGeneration.from_pretrained(model_name)
-    tokenizer = T5TokenizerFast.from_pretrained(model_name)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     return model, tokenizer
 
 
-def split_text(text: str, max_chunk_tokens: int = 450):
-    """
-    Divide un documento en fragmentos para facilitar
-    la generación de preguntas.
-
-    Parámetros
-    ----------
-    text : str
-        Documento completo.
-
-    max_chunk_tokens : int
-        Número máximo aproximado de palabras por fragmento.
-
-    Retorna
-    -------
-    list
-        Lista de fragmentos.
-    """
-
+def split_text(text: str, max_chunk_tokens: int = 350):
     sentences = re.split(r'(?<=[.!?])\s+', text)
-
     chunks = []
     current_chunk = ""
     current_tokens = 0
 
     for sentence in sentences:
-
         sentence_tokens = len(sentence.split())
-
         if current_tokens + sentence_tokens <= max_chunk_tokens:
-
             current_chunk += sentence + " "
             current_tokens += sentence_tokens
-
         else:
-
             chunks.append(current_chunk.strip())
-
             current_chunk = sentence + " "
             current_tokens = sentence_tokens
 
     if current_chunk:
         chunks.append(current_chunk.strip())
-
     return chunks
 
 
-def remove_duplicate_questions(
-    questions: list,
-    similarity_threshold: int = 85
-):
-    """
-    Elimina preguntas muy similares utilizando
-    comparación difusa (TheFuzz).
-
-    Parámetros
-    ----------
-    questions : list
-        Lista de preguntas generadas.
-
-    similarity_threshold : int
-        Porcentaje máximo permitido de similitud.
-
-    Retorna
-    -------
-    list
-        Lista de preguntas sin duplicados.
-    """
-
+def remove_duplicate_questions(questions: list, similarity_threshold: int = 75):
     filtered_questions = []
-
     for question in questions:
-
+        if not question.endswith("?"):
+            question += "?"
+            
         is_duplicate = any(
-            fuzz.ratio(
-                question.lower(),
-                existing.lower()
-            ) > similarity_threshold
+            fuzz.ratio(question.lower(), existing.lower()) > similarity_threshold
             for existing in filtered_questions
         )
-
         if not is_duplicate:
             filtered_questions.append(question)
-
     return filtered_questions
 
 
-def generate_questions(text: str, target_questions: int = 5):
+def generate_questions(text: str, target_questions: int = 5, lang: str = "es"):
     """
-    Genera preguntas automáticamente a partir del documento.
-
-    Parámetros
-    ----------
-    text : str
-        Texto del documento.
-
-    target_questions : int
-        Número aproximado de preguntas que se desea generar.
-
-    Retorna
-    -------
-    list
-        Lista de preguntas generadas.
+    Genera preguntas automáticas adaptando el modelo según el idioma detectado.
     """
-
-    model, tokenizer = load_question_generator()
-
+    # Pasamos el idioma detectado a la carga del modelo
+    model, tokenizer = load_question_generator(lang=lang)
     chunks = split_text(text)
 
-    # Evita división entre cero si el documento está vacío.
     if not chunks:
         return []
 
     questions = []
+    num_beams = 4
 
-    num_beams = 8
-    num_beam_groups = 4
-
-    questions_per_chunk = math.ceil(
-        target_questions / len(chunks)
-    )
-
-    num_return_sequences = min(
-        math.ceil(questions_per_chunk * 2.5),
-        num_beams
-    )
+    questions_per_chunk = math.ceil(target_questions / len(chunks))
+    num_return_sequences = min(math.ceil(questions_per_chunk * 2), num_beams)
 
     for chunk in chunks:
-
-        input_text = "question generation: " + chunk
+        # Formato de entrada adaptado según el idioma
+        if lang == "es":
+            input_text = f"context: {chunk}"
+        else:
+            input_text = f"question generation: {chunk}"
 
         inputs = tokenizer(
             input_text,
@@ -177,33 +115,21 @@ def generate_questions(text: str, target_questions: int = 5):
         outputs = model.generate(
             input_ids=inputs["input_ids"],
             attention_mask=inputs["attention_mask"],
-            max_length=128,
+            max_length=64,
             num_beams=num_beams,
-            num_beam_groups=num_beam_groups,
-            diversity_penalty=0.5,
             early_stopping=True,
-            no_repeat_ngram_size=2,
+            no_repeat_ngram_size=3,
             num_return_sequences=num_return_sequences
         )
 
-        generated = tokenizer.batch_decode(
-            outputs,
-            skip_special_tokens=True
-        )
+        generated = tokenizer.batch_decode(outputs, skip_special_tokens=True)
 
         for question in generated:
+            question = re.sub(r"^(pregunta|question):\s*", "", question, flags=re.IGNORECASE)
+            question = question.strip()
 
-            question = re.sub(
-                r"^(question|pregunta):\s*",
-                "",
-                question,
-                flags=re.IGNORECASE
-            ).strip()
-
-            # Evita preguntas demasiado cortas.
-            if len(question.split()) > 3:
+            if len(question.split()) > 4:
                 questions.append(question)
 
     questions = remove_duplicate_questions(questions)
-
     return questions[:target_questions]

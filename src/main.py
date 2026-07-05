@@ -124,16 +124,18 @@ def main():
         print(f"{topic}: {words}")
 
     # =====================================================
-    # 8. Generación automática de preguntas
+    # 8. Generación automática de preguntas (Adaptativa por idioma)
     # =====================================================
 
     print("\n" + "=" * 60)
     print("GENERACIÓN DE PREGUNTAS")
     print("=" * 60)
 
+    # Enviamos dinámicamente el idioma detectado para proteger tu arquitectura
     questions = generate_questions(
         text,
-        target_questions=5
+        target_questions=5,
+        lang=language
     )
 
     print("\nPreguntas generadas:")
@@ -151,18 +153,22 @@ def main():
 
     qa_pairs = extract_answers(
         text,
-        questions
+        questions,
+        lang=language  # <--- Le pasamos el idioma aquí también
     )
 
-    for pair in qa_pairs:
+    # Ajustado con enumerate para evitar errores con índices inexistentes
+    for idx, pair in enumerate(qa_pairs, start=1):
 
-        print(f"\nPregunta {pair['id'] + 1}:")
+        print(f"\nPregunta {idx}:")
         print(pair["question"])
 
         print("Respuesta:")
         print(pair["answer"])
 
-        print(f"Score QA: {pair['score']}")
+        # Opcional por si tu pipeline de extracción añade scores individuales
+        if "score" in pair:
+            print(f"Score QA: {pair['score']}")
 
     # =====================================================
     # 10. Similitud semántica
@@ -174,15 +180,16 @@ def main():
 
     qa_pairs = calculate_similarity(qa_pairs)
 
-    for pair in qa_pairs:
+    for idx, pair in enumerate(qa_pairs, start=1):
 
         print(
-            f"\nPregunta {pair['id'] + 1}"
+            f"\nPregunta {idx}"
         )
 
-        print(
-            f"Relevancia: {pair['relevance_score']}%"
-        )
+        if "relevance_score" in pair:
+            print(
+                f"Relevancia: {pair['relevance_score']}%"
+            )
 
     # =====================================================
     # 11. Guardar reporte
