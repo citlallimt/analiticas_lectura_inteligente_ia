@@ -178,12 +178,6 @@ El reporte incluye las preguntas elaboradas automáticamente, las respuestas ext
 </p>
 
 
-## 👤 Autor
-
-**Citlalli M. T.**
-
-Proyecto desarrollado como trabajo de tesis para la obtención del grado de Ingeniería en Tecnologías de la Información.
-
 ## 📈 Estado del proyecto
 
 ✅ Proyecto de tesis finalizado.
