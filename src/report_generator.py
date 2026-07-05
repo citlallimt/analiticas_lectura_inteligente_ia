@@ -30,6 +30,8 @@ def select_output_directory():
         title="Selecciona la carpeta donde guardar el reporte"
     )
 
+    root.destroy()
+
     return directory
 
 
@@ -72,9 +74,7 @@ def save_report(
     directory = select_output_directory()
 
     if not directory:
-
-        print("No se seleccionó carpeta.")
-
+        print("No se seleccionó ninguna carpeta.")
         return
 
     filename = os.path.basename(input_file)
@@ -94,33 +94,78 @@ def save_report(
         file.write("ANALÍTICAS DE LECTURA INTELIGENTE\n")
         file.write("=" * 80 + "\n\n")
 
-        file.write("MÉTRICAS\n")
-        file.write(str(metrics))
-        file.write("\n\n")
+        # ==========================================
+        # Métricas
+        # ==========================================
+
+        file.write("MÉTRICAS DEL DOCUMENTO\n")
+        file.write("-" * 80 + "\n")
+
+        file.write(
+            f"Palabras: {metrics['word_count']}\n"
+        )
+
+        file.write(
+            f"Oraciones: {metrics['sentence_count']}\n"
+        )
+
+        file.write(
+            f"Caracteres: {metrics['character_count']}\n\n"
+        )
+
+        # ==========================================
+        # Complejidad
+        # ==========================================
 
         file.write(
             f"Complejidad léxica: {complexity}\n\n"
         )
 
+        # ==========================================
+        # Sentimiento
+        # ==========================================
+
+        file.write("ANÁLISIS DE SENTIMIENTO\n")
+        file.write("-" * 80 + "\n")
+
         file.write(
-            f"Sentimiento: {sentiment}\n\n"
+            f"Etiqueta: {sentiment['label']}\n"
         )
 
+        file.write(
+            f"Confianza: {sentiment['score']}\n\n"
+        )
+
+        # ==========================================
+        # Palabras clave
+        # ==========================================
+
         file.write("PALABRAS CLAVE\n")
+        file.write("-" * 80 + "\n")
 
         for keyword in keywords:
-            file.write(f"- {keyword}\n")
+            file.write(f"• {keyword}\n")
 
         file.write("\n")
 
-        file.write("TÓPICOS\n")
+        # ==========================================
+        # Tópicos
+        # ==========================================
+
+        file.write("TÓPICOS DETECTADOS\n")
+        file.write("-" * 80 + "\n")
 
         for topic, words in topics.items():
             file.write(f"{topic}: {words}\n")
 
         file.write("\n")
 
-        file.write("PREGUNTAS Y RESPUESTAS\n\n")
+        # ==========================================
+        # Preguntas y respuestas
+        # ==========================================
+
+        file.write("PREGUNTAS Y RESPUESTAS\n")
+        file.write("=" * 80 + "\n\n")
 
         for pair in qa_pairs:
 
@@ -128,13 +173,15 @@ def save_report(
                 f"Pregunta {pair['id'] + 1}\n"
             )
 
-            file.write(pair["question"] + "\n\n")
-
             file.write(
-                "Respuesta:\n"
+                pair["question"] + "\n\n"
             )
 
-            file.write(pair["answer"] + "\n\n")
+            file.write("Respuesta:\n")
+
+            file.write(
+                pair["answer"] + "\n\n"
+            )
 
             file.write(
                 f"Score QA: {pair['score']}\n"
@@ -144,6 +191,9 @@ def save_report(
                 f"Relevancia: {pair['relevance_score']}%\n"
             )
 
-            file.write("-" * 80 + "\n")
+            file.write(
+                "-" * 80 + "\n"
+            )
 
-    print(f"\nReporte guardado en:\n{output_file}")
+    print("\nReporte generado correctamente.")
+    print(output_file)
