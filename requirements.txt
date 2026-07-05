@@ -6,9 +6,11 @@ textstat
 transformers
 sentence-transformers
 thefuzz
+torch
 numpy
 scikit-learn
-torch
-nltk
 scipy
 regex
+nltk
+accelerate
+safetensors
