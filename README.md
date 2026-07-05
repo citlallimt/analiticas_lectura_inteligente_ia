@@ -1,5 +1,5 @@
 <p align="center">
-  <img src= assets/Banner.png width="100%">
+  <img src=![Banner](assets/Banner.png) width="100%">
 </p>
 
   # 📖 Analíticas de Lectura Inteligente
