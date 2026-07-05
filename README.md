@@ -113,20 +113,45 @@ analiticas_lectura_inteligente_ia
 - Google Colab
 - Hugging Face
 - PyTorch
+## ⚙️ Instalación
 
-## 📊 Resultados
+Clonar el repositorio
 
-El sistema genera automáticamente:
+```bash
+git clone https://github.com/citlallimt/analiticas_lectura_inteligente_ia.git
+```
 
-- Métricas del documento.
-- Complejidad léxica.
-- Análisis de sentimiento.
-- Palabras clave.
-- Tópicos principales.
-- Preguntas automáticas.
-- Respuestas generadas.
-- Similitud semántica.
-- Reporte final en formato TXT.
+Entrar al proyecto
+
+```bash
+cd analiticas_lectura_inteligente_ia
+```
+
+Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+Ejecutar
+
+```bash
+python src/main.py
+```
+## 📊 Resultados generados
+
+El sistema produce automáticamente:
+
+- Idioma detectado
+- Métricas del documento
+- Complejidad léxica
+- Análisis de sentimiento
+- Palabras clave
+- Tópicos principales
+- Preguntas generadas
+- Respuestas automáticas
+- Similitud semántica
+- Reporte TXT
   
 ## 📄 Licencia
 
