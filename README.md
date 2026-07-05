@@ -10,10 +10,6 @@
 Potenciando el Aprendizaje con Inteligencia Artificial
 </p>
 
-  # 📖 Analíticas de Lectura Inteligente
-
-### Potenciando el Aprendizaje con Inteligencia Artificial
-
 ## 🎯 Descripción
 
 Este proyecto fue desarrollado como trabajo de tesis para la obtención del grado de Ingeniería en Tecnologías de la Información.
