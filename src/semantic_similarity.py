@@ -41,52 +41,62 @@ def calculate_similarity(qa_pairs: list):
         Lista actualizada con la relevancia semántica.
     """
 
-    model = load_similarity_model()
+    try:
 
-    questions = [
-        pair["question"]
-        for pair in qa_pairs
-    ]
+        model = load_similarity_model()
 
-    answers = [
-        pair["answer"]
-        for pair in qa_pairs
-    ]
+        questions = [
+            pair["question"]
+            for pair in qa_pairs
+        ]
 
-    question_embeddings = model.encode(
-        questions,
-        convert_to_tensor=True
-    )
+        answers = [
+            pair["answer"]
+            for pair in qa_pairs
+        ]
 
-    answer_embeddings = model.encode(
-        answers,
-        convert_to_tensor=True
-    )
+        question_embeddings = model.encode(
+            questions,
+            convert_to_tensor=True
+        )
 
-    similarity_matrix = util.pytorch_cos_sim(
-        question_embeddings,
-        answer_embeddings
-    )
+        answer_embeddings = model.encode(
+            answers,
+            convert_to_tensor=True
+        )
 
-    results = []
+        similarity_matrix = util.pytorch_cos_sim(
+            question_embeddings,
+            answer_embeddings
+        )
 
-    for i, pair in enumerate(qa_pairs):
+        results = []
 
-        similarity = similarity_matrix[i][i].item()
+        for i, pair in enumerate(qa_pairs):
 
-        relevance = max(
-            0,
-            min(
-                100,
-                ((similarity + 1) / 2) * 100
+            similarity = similarity_matrix[i][i].item()
+
+            relevance = max(
+                0,
+                min(
+                    100,
+                    ((similarity + 1) / 2) * 100
+                )
             )
+
+            pair["relevance_score"] = round(
+                relevance,
+                2
+            )
+
+            results.append(pair)
+
+        return results
+
+    except Exception as error:
+
+        print(
+            f"Error calculando la similitud semántica: {error}"
         )
 
-        pair["relevance_score"] = round(
-            relevance,
-            2
-        )
-
-        results.append(pair)
-
-    return results
+        return qa_pairs
