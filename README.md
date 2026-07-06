@@ -177,16 +177,6 @@ El reporte incluye las preguntas elaboradas automáticamente, las respuestas ext
   <img src="assets/Reporte.jpeg" width="90%">
 </p>
 
-  
-## 📄 Licencia
-
-Este proyecto se distribuye bajo la licencia MIT.
-
-## 👤 Autor
-
-**Citlalli M. T.**
-
-Proyecto desarrollado como trabajo de tesis para la obtención del grado de Ingeniería en Tecnologías de la Información.
 
 ## 📈 Estado del proyecto
 
