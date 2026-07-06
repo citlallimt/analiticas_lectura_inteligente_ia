@@ -27,174 +27,139 @@ from question_generator import generate_questions
 from answer_extractor import extract_answers
 from semantic_similarity import calculate_similarity
 from report_generator import save_report
+from summarizer import generate_summary
 
 
-def main():
-    """
-    Ejecuta el flujo principal del sistema.
-    """
+def run_pipeline(input_file):
 
-    print("=" * 60)
+    print("=" * 80)
     print("ANALÍTICAS DE LECTURA INTELIGENTE")
-    print("=" * 60)
+    print("=" * 80)
 
     # =====================================================
-    # 1. Lectura del documento
+    # 1. Lectura del Documento
     # =====================================================
-
-    input_file = "documento.txt"
-
     text = load_text(input_file)
-
     print("Documento cargado correctamente.")
 
     # =====================================================
-    # 2. Detección del idioma
+    # 2. Detección de Idioma
     # =====================================================
-
     language = detect_text_language(text)
-
     print(f"Idioma detectado: {language}")
 
     # =====================================================
-    # 3. Procesamiento con spaCy
+    # 3. Resumen Automático (Nueva Fase 1)
     # =====================================================
+    print("\n" + "=" * 80)
+    print("RESUMEN AUTOMÁTICO DEL DOCUMENTO")
+    print("=" * 80)
 
+    try:
+        summary = generate_summary(text, language=language)
+        print(summary)
+    except Exception as e:
+        summary = "No fue posible generar el resumen de forma automática."
+        print(summary)
+        print(f"Detalle: {e}")
+        
+    print("=" * 80)
+
+    # =====================================================
+    # 4. Procesamiento spaCy
+    # =====================================================
     nlp = load_spacy_model(language)
-
     doc = process_text(text, nlp)
-
-    print("Documento procesado correctamente.")
+    print("\nDocumento procesado correctamente con spaCy.")
 
     # =====================================================
-    # 4. Métricas del documento
+    # 5. Métricas de Lectura
     # =====================================================
-
     metrics = calculate_text_metrics(text)
-
-    print("\nMétricas del documento")
-
+    print("\nMÉTRICAS DEL DOCUMENTO")
     print(metrics)
 
     # =====================================================
-    # 5. Complejidad léxica
+    # 6. Complejidad Léxica
     # =====================================================
-
     complexity = calculate_lexical_complexity(text)
-
     print(f"\nComplejidad léxica: {complexity}")
 
     # =====================================================
-    # 6. Análisis de sentimiento
+    # 7. Análisis de Sentimiento
     # =====================================================
-
     sentiment = analyze_sentiment(text)
-
-    print("\nSentimiento del documento")
-
+    print("\nANÁLISIS DE SENTIMIENTO")
     print(sentiment)
 
     # =====================================================
-    # 7. Análisis temático
+    # 8. Análisis Temático y Tópicos
     # =====================================================
-
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 80)
     print("ANÁLISIS TEMÁTICO")
-    print("=" * 60)
+    print("=" * 80)
 
     tokens = extract_tokens(doc)
-
-    keywords = extract_keywords(
-        text,
-        language
-    )
+    keywords = extract_keywords(text, language)
 
     print("\nPalabras clave:")
-
     for keyword in keywords:
-        print(f"- {keyword}")
+        print("-", keyword)
 
     dictionary, corpus, lda_model = build_lda_model(tokens)
-
     topics = get_topics(lda_model)
 
-    print("\nTópicos detectados:")
-
+    print("\Tópicos detectados:")
     for topic, words in topics.items():
         print(f"{topic}: {words}")
 
     # =====================================================
-    # 8. Generación automática de preguntas (Adaptativa por idioma)
+    # 9. Generación Automática de Preguntas
     # =====================================================
-
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 80)
     print("GENERACIÓN DE PREGUNTAS")
-    print("=" * 60)
+    print("=" * 80)
 
-    # Enviamos dinámicamente el idioma detectado para proteger tu arquitectura
+    # CAMBIAMOS 'text' POR 'summary' PARA QUE PREGUNTE SOBRE LAS IDEAS PRINCIPALES
     questions = generate_questions(
-        text,
+        summary,  # <-- Aquí cambiamos text por summary
         target_questions=5,
         lang=language
     )
 
-    print("\nPreguntas generadas:")
-
-    for i, question in enumerate(questions, start=1):
-        print(f"{i}. {question}")
+    for i, q in enumerate(questions, start=1):
+        print(f"{i}. {q}")
 
     # =====================================================
-    # 9. Extracción automática de respuestas
+    # 10. Extracción Nativa de Respuestas
     # =====================================================
-
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 80)
     print("EXTRACCIÓN DE RESPUESTAS")
-    print("=" * 60)
+    print("=" * 80)
 
     qa_pairs = extract_answers(
         text,
         questions,
-        lang=language  # <--- Le pasamos el idioma aquí también
+        lang=language
     )
 
-    # Ajustado con enumerate para evitar errores con índices inexistentes
-    for idx, pair in enumerate(qa_pairs, start=1):
-
-        print(f"\nPregunta {idx}:")
-        print(pair["question"])
-
-        print("Respuesta:")
-        print(pair["answer"])
-
-        # Opcional por si tu pipeline de extracción añade scores individuales
-        if "score" in pair:
-            print(f"Score QA: {pair['score']}")
-
     # =====================================================
-    # 10. Similitud semántica
+    # 11. Cálculo de Similitud Semántica (TheFuzz)
     # =====================================================
-
-    print("\n" + "=" * 60)
-    print("SIMILITUD SEMÁNTICA")
-    print("=" * 60)
-
     qa_pairs = calculate_similarity(qa_pairs)
 
-    for idx, pair in enumerate(qa_pairs, start=1):
-
-        print(
-            f"\nPregunta {idx}"
-        )
-
-        if "relevance_score" in pair:
-            print(
-                f"Relevancia: {pair['relevance_score']}%"
-            )
+    # Impresión estructurada de los pares Q&A finales evaluados
+    for i, pair in enumerate(qa_pairs, start=1):
+        print(f"\nPregunta {i}:")
+        print(pair["question"])
+        print("Respuesta:")
+        print(pair["answer"])
+        print(f"Score Confianza QA: {pair.get('score', 0.0)}")
+        print(f"Relevancia Semántica: {pair.get('relevance_score', 0.0)}%")
 
     # =====================================================
-    # 11. Guardar reporte
+    # 12. Guardado del Reporte de Analíticas
     # =====================================================
-
     save_report(
         input_file=input_file,
         metrics=metrics,
@@ -204,8 +169,28 @@ def main():
         topics=topics,
         qa_pairs=qa_pairs
     )
-    
-    print("\nProcesamiento finalizado.")
+
+    print("\nProcesamiento finalizado exitosamente. Reporte generado.")
+
+    # =====================================================
+    # RETORNO DE RESULTADOS PARA LA INTERFAZ GRÁFICA (GUI)
+    # =====================================================
+    return {
+        "text": text,
+        "language": language,
+        "summary": summary,
+        "metrics": metrics,
+        "complexity": complexity,
+        "sentiment": sentiment,
+        "keywords": keywords,
+        "topics": topics,
+        "questions": questions
+    }
+
+
+def main():
+    # Ejecuta el análisis sobre tu archivo de texto por defecto
+    run_pipeline("documento.txt")
 
 
 if __name__ == "__main__":

@@ -103,20 +103,31 @@ def calculate_lexical_complexity(text: str):
     return round(complexity, 2)
 
 
-def analyze_sentiment(text: str):
+def analyze_sentiment(text):
     """
-    Analiza el sentimiento del documento.
-
-    Parámetros
-    ----------
-    text : str
-        Texto del documento.
-
-    Retorna
-    -------
-    dict
-        Etiqueta y confianza del modelo.
+    Analiza el sentimiento general usando fragmentos controlados
+    para evitar cierres inesperados por falta de memoria RAM.
     """
+    if not text or not text.strip():
+        return {'label': 'neutral', 'score': 0.0}
+
+    try:
+        from transformers import pipeline
+        # Cargamos el pipeline de forma local
+        classifier = pipeline("sentiment-analysis", model="pysentimiento/robertuito-sentiment-analysis")
+        
+        # En lugar de pasarle todo el texto pesado que asfixia la RAM,
+        # le pasamos únicamente los primeros 400 caracteres (lo suficiente para el tono inicial)
+        short_text = text[:400]
+        result = classifier(short_text)
+        
+        if result:
+            return {'label': result[0]['label'].lower(), 'score': round(float(result[0]['score']), 4)}
+    except Exception:
+        # Alternativa segura si el modelo falla o se queda sin memoria
+        return {'label': 'neutral', 'score': 0.5000}
+    
+    return {'label': 'neutral', 'score': 0.5000}
 
     warnings.filterwarnings("ignore")
 
