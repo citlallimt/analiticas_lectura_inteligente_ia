@@ -19,53 +19,53 @@ class Application:
         self.root.title("Analíticas de Lectura Inteligente")
         self.root.geometry("1150x920")
         self.root.configure(bg="#f6f5f7")  # Fondo limpio ligeramente grisáceo para contraste
-        
+       
         # --- PALETA DE COLORES ---
-        self.COLOR_MORADO_MAIN = "#5a246d"   
-        self.COLOR_FIUSHA_MAIN = "#991b64"   
+        self.COLOR_MORADO_MAIN = "#5a246d"  
+        self.COLOR_FIUSHA_MAIN = "#991b64"  
         self.COLOR_FONDO_CARD = "#ffffff"    
         self.COLOR_TEXTO_MAIN = "#1a1a1a"    
         self.COLOR_GRIS_BORDE = "#dddae0"    
 
         self.style = ttk.Style()
         self.theme_use = self.style.theme_use("clam")
-        
+       
         # Configuración general de estilos ttk
         self.style.configure(".", background="#f6f5f7", foreground=self.COLOR_TEXTO_MAIN)
         self.style.configure("TFrame", background="#f6f5f7")
         self.style.configure("TLabel", font=("Segoe UI", 10), background="#f6f5f7")
-        
+       
         # Etiquetas de encabezado
         self.style.configure("Header.TLabel", font=("Segoe UI", 20, "bold"), foreground=self.COLOR_MORADO_MAIN, background="#f6f5f7")
         self.style.configure("Sub.TLabel", font=("Segoe UI", 11, "bold"), foreground=self.COLOR_FIUSHA_MAIN, background=self.COLOR_FONDO_CARD)
-        
+       
         # Contenedores (Cards) con bordes suaves
         self.style.configure("Section.TLabelframe", background=self.COLOR_FONDO_CARD, relief="solid", borderwidth=1)
         self.style.configure("Section.TLabelframe.Label", font=("Segoe UI", 11, "bold"), foreground=self.COLOR_MORADO_MAIN, background="#f6f5f7")
-        
+       
         # Botones
         self.style.configure("Primary.TButton", font=("Segoe UI", 10, "bold"), background=self.COLOR_MORADO_MAIN, foreground="white", borderwidth=0, padding=6)
         self.style.map("Primary.TButton", background=[("active", "#451a54"), ("disabled", "#d2cbd6")])
-        
+       
         self.style.configure("Action.TButton", font=("Segoe UI", 10, "bold"), background=self.COLOR_FIUSHA_MAIN, foreground="white", borderwidth=0, padding=6)
         self.style.map("Action.TButton", background=[("active", "#7a124e"), ("disabled", "#e3cbd8")])
 
         self.style.configure("Nav.TButton", font=("Segoe UI", 9, "bold"), background="#eff0f2", foreground=self.COLOR_TEXTO_MAIN)
         self.style.map("Nav.TButton", background=[("active", "#dbdcde")])
-        
+       
         # Pestañas Superiores
         self.style.configure("TNotebook", background="#f6f5f7", borderwidth=0)
         self.style.configure("TNotebook.Tab", font=("Segoe UI", 10, "bold"), padding=[18, 6], background="#e4e2e6", foreground="#555555")
-        self.style.map("TNotebook.Tab", 
-                       background=[("selected", self.COLOR_MORADO_MAIN)], 
+        self.style.map("TNotebook.Tab",
+                       background=[("selected", self.COLOR_MORADO_MAIN)],
                        foreground=[("selected", "white")])
-        
+       
         # Variables lógicas
         self.file_path = None
         self.pipeline_results = None
         self.modo_manual = True
         self.preguntas_totales = []
-        self.respuestas_alumno_textos = [] 
+        self.respuestas_alumno_textos = []
         self.indice_pregunta_actual = 0
 
         self.create_widgets()
@@ -95,7 +95,7 @@ class Application:
 
         self.start_button = ttk.Button(control_buttons, text="⚡ Iniciar Análisis", style="Action.TButton", command=self.start_analysis)
         self.start_button.pack(side="left", padx=18)
-        
+       
         self.lbl_status = ttk.Label(control_buttons, text="Esperando carga de archivo...", font=("Segoe UI", 10, "italic"), foreground="#777777")
         self.lbl_status.pack(side="left", padx=10)
 
@@ -130,7 +130,7 @@ class Application:
 
         left_frame = ttk.LabelFrame(self.tab1, text=" Síntesis Estructurada del Manuscrito ", style="Section.TLabelframe", padding=15)
         left_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 18))
-        
+       
         self.txt_resumen = tk.Text(left_frame, wrap="word", font=("Segoe UI", 11), bg=self.COLOR_FONDO_CARD, fg=self.COLOR_TEXTO_MAIN, relief="flat", highlightthickness=0)
         self.txt_resumen.pack(fill="both", expand=True)
 
@@ -141,13 +141,13 @@ class Application:
 
         metrics_frame = ttk.LabelFrame(right_frame, text=" Variables Volumétricas y Léxicas ", style="Section.TLabelframe", padding=15)
         metrics_frame.grid(row=0, column=0, sticky="nsew", pady=(0, 18))
-        
+       
         self.lbl_metrics = ttk.Label(metrics_frame, text="A la espera del procesamiento del documento fuente...", justify="left", font=("Segoe UI", 10), background=self.COLOR_FONDO_CARD, foreground="#444444")
         self.lbl_metrics.pack(anchor="w", fill="both", expand=True)
 
         topics_frame = ttk.LabelFrame(right_frame, text=" Descriptores Temáticos Clave ", style="Section.TLabelframe", padding=15)
         topics_frame.grid(row=1, column=0, sticky="nsew")
-        
+       
         self.txt_topics = tk.Text(topics_frame, wrap="word", font=("Segoe UI", 10), bg=self.COLOR_FONDO_CARD, fg=self.COLOR_TEXTO_MAIN, relief="flat", highlightthickness=0)
         self.txt_topics.pack(fill="both", expand=True)
 
@@ -158,13 +158,13 @@ class Application:
 
         self.quiz_frame = ttk.LabelFrame(self.tab2, text=" Módulo de Comprensión e Interrogación ", style="Section.TLabelframe", padding=15)
         self.quiz_frame.grid(row=0, column=0, sticky="nsew", pady=(0, 18))
-        
+       
         nav_panel = tk.Frame(self.quiz_frame, background=self.COLOR_FONDO_CARD)
         nav_panel.pack(fill="x", pady=(0, 12))
-        
+       
         self.lbl_pregunta_num = ttk.Label(nav_panel, text="Pregunta X de Y", font=("Segoe UI", 12, "bold"), foreground=self.COLOR_MORADO_MAIN, background=self.COLOR_FONDO_CARD)
         self.lbl_pregunta_num.pack(side="left", padx=(0, 25))
-        
+       
         self.btn_anterior = ttk.Button(nav_panel, text="◀ Anterior", style="Nav.TButton", command=self.pregunta_anterior, state="disabled")
         self.btn_anterior.pack(side="left", padx=4)
 
@@ -173,23 +173,23 @@ class Application:
 
         self.btn_finalizar_llenado = ttk.Button(nav_panel, text="✔ Validar Cuestionario", style="Action.TButton", command=self.finalizar_cuestionario, state="disabled")
         self.btn_finalizar_llenado.pack(side="left", padx=25)
-        
+       
         self.lbl_pregunta_texto = ttk.Label(self.quiz_frame, text="Selecciona un documento para estructurar el banco de preguntas.", font=("Segoe UI", 11, "bold"), wraplength=1020, justify="left", foreground=self.COLOR_TEXTO_MAIN, background=self.COLOR_FONDO_CARD)
         self.lbl_pregunta_texto.pack(fill="x", anchor="w", pady=(4, 12))
 
         ttk.Label(self.quiz_frame, text="Escribe tu respuesta aquí (Modo Evaluación Alumno Activo):", font=("Segoe UI", 9, "italic"), foreground="#666666", background=self.COLOR_FONDO_CARD).pack(anchor="w", pady=(0, 6))
-        
+       
         # --- RECUADRO DE RESPUESTA ---
         self.txt_respuesta_alumno = tk.Text(
-            self.quiz_frame, 
-            height=6, 
-            font=("Segoe UI", 12), 
-            bg="#ffffff", 
-            fg="#000000",             
-            insertbackground="#000000",   
-            relief="solid", 
-            borderwidth=1, 
-            highlightbackground=self.COLOR_GRIS_BORDE, 
+            self.quiz_frame,
+            height=6,
+            font=("Segoe UI", 12),
+            bg="#ffffff",
+            fg="#000000",            
+            insertbackground="#000000",  
+            relief="solid",
+            borderwidth=1,
+            highlightbackground=self.COLOR_GRIS_BORDE,
             wrap="word",
             padx=10,
             pady=10
@@ -199,10 +199,10 @@ class Application:
         # Sección de Resultados Inferior
         self.results_frame = ttk.LabelFrame(self.tab2, text=" Tablero Analítico y Reporte Semántico ", style="Section.TLabelframe", padding=15)
         self.results_frame.grid(row=1, column=0, sticky="nsew")
-        
+       
         actions_panel = tk.Frame(self.results_frame, background=self.COLOR_FONDO_CARD)
         actions_panel.pack(fill="x", pady=(0, 10))
-        
+       
         self.btn_evaluar = ttk.Button(actions_panel, text="📊 Procesar Reporte Final", style="Action.TButton", state="disabled", command=self.evaluar_respuestas_manuales)
         self.btn_evaluar.pack(side="left", padx=(0, 12))
 
@@ -212,17 +212,17 @@ class Application:
         # --- RECUADRO DE CONSOLA CON SCROLLBAR INTEGRADA Y BLOQUEABLE ---
         console_frame = tk.Frame(self.results_frame)
         console_frame.pack(fill="both", expand=True, pady=4)
-        
+       
         scroll_console = tk.Scrollbar(console_frame, orient="vertical")
         scroll_console.pack(side="right", fill="y")
 
         self.txt_resultados_eval = tk.Text(
-            console_frame, 
-            wrap="word", 
-            font=("Consolas", 10), 
-            bg="#1c191f", 
-            fg="#f5f2f7", 
-            relief="flat", 
+            console_frame,
+            wrap="word",
+            font=("Consolas", 10),
+            bg="#1c191f",
+            fg="#f5f2f7",
+            relief="flat",
             insertbackground="white",
             yscrollcommand=scroll_console.set
         )
@@ -237,7 +237,7 @@ class Application:
         if file_path:
             self.file_path = file_path
             self.lbl_status.config(text=f"📄 Cargado: {os.path.basename(file_path)}", foreground=self.COLOR_MORADO_MAIN, font=("Segoe UI", 10, "bold"))
-            
+           
             self.txt_resumen.config(state="normal")
             self.txt_resumen.delete("1.0", tk.END)
             self.txt_resumen.insert(tk.END, f"Documento listo para procesamiento analítico por lotes:\n{file_path}")
@@ -250,7 +250,7 @@ class Application:
 
         self.lbl_status.config(text="⚙️ Ejecutando modelos NLP... Espere por favor", foreground=self.COLOR_FIUSHA_MAIN)
         self.start_button.config(state="disabled")
-        
+       
         Thread(target=self._worker_pipeline, daemon=True).start()
 
     def _worker_pipeline(self):
@@ -311,7 +311,7 @@ class Application:
             "¿De qué manera las herramientas como X (Twitter) impactan la divulgación post-publicación?",
             "¿En qué consiste el fenómeno de las 'alucinaciones' en los modelos de IA generativa?"
         ]
-        
+       
         preguntas_crudas = res.get("questions", [])
         if not preguntas_crudas or len(preguntas_crudas) <= 1 or "país" in preguntas_crudas[0]:
             preguntas_crudas = banco_preguntas_articulo
@@ -319,10 +319,10 @@ class Application:
         self.preguntas_totales = []
         for idx in range(cantidad_solicitada):
             self.preguntas_totales.append(preguntas_crudas[idx % len(preguntas_crudas)])
-                        
+                       
         self.respuestas_alumno_textos = [""] * len(self.preguntas_totales)
         self.indice_pregunta_actual = 0
-        
+       
         self.btn_siguiente.config(state="normal")
         self.btn_finalizar_llenado.config(state="normal")
 
@@ -333,36 +333,38 @@ class Application:
             "¿Desea resolver el cuestionario de manera MANUAL?\n"
             "(Si selecciona 'No', la IA extraerá las respuestas automáticamente)."
         )
-        
+       
         # Mover foco a la pestaña
         self.notebook.select(self.tab2)
-        
+       
         if self.modo_manual:
-            self.txt_respuesta_alumno.config(state="normal", bg="#ffffff", fg="#000000", insertbackground="#000000") 
+            self.txt_respuesta_alumno.config(state="normal", bg="#ffffff", fg="#000000", insertbackground="#000000")
             self.btn_ia_answers.config(state="disabled")
             self.mostrar_pregunta_en_pantalla()
         else:
-            self.txt_respuesta_alumno.config(bg="#f1eff2", fg="#444444") 
+            self.txt_respuesta_alumno.config(state="normal")  # Desbloqueo temporal seguro
+            self.txt_respuesta_alumno.config(bg="#f1eff2", fg="#444444")
             self.btn_ia_answers.config(state="disabled")
             self.autorrellenar_respuestas_ia()
 
     def mostrar_pregunta_en_pantalla(self):
         cant = len(self.preguntas_totales)
         idx = self.indice_pregunta_actual
-        
+       
         self.lbl_pregunta_num.config(text=f"Pregunta {idx + 1} de {cant}")
         self.lbl_pregunta_texto.config(text=self.preguntas_totales[idx])
-        
+       
+        # ASEGURAMOS DESBLOQUEO ANTES DE OPERAR EN EL TEXTO
         self.txt_respuesta_alumno.config(state="normal")
         self.txt_respuesta_alumno.delete("1.0", tk.END)
         self.txt_respuesta_alumno.insert(tk.END, self.respuestas_alumno_textos[idx])
-        
+       
         if self.modo_manual:
             self.txt_respuesta_alumno.config(state="normal", bg="#ffffff", fg="#000000", insertbackground="#000000")
             self.txt_respuesta_alumno.focus_set()
         else:
             self.txt_respuesta_alumno.config(state="disabled", bg="#f1eff2", fg="#444444")
-            
+           
         self.btn_anterior.config(state="normal" if idx > 0 else "disabled")
         self.btn_siguiente.config(state="normal" if idx < (cant - 1) else "disabled")
 
@@ -394,7 +396,7 @@ class Application:
     def autorrellenar_respuestas_ia(self):
         if not self.pipeline_results:
             return
-        
+       
         referencias_robustas = [
             "Optimizar el tiempo de los investigadores, mejorar la calidad general de la comunicación, asistir en manuscritos y detectar plagio.",
             "GEMINI demostró una precisión del 68% en los casos analizados, siendo superior a ChatGPT-4 el cual alcanzó únicamente un 49%.",
@@ -402,10 +404,10 @@ class Application:
             "Aumenta la probabilidad de que un artículo sea causado y ayuda a difundir contenido científico a la población laica.",
             "Es un fenómeno donde los algoritmos de IA generativa fabrican o inventan referencias médicas de forma inexacta."
         ]
-        
+       
         for i in range(len(self.preguntas_totales)):
             self.respuestas_alumno_textos[i] = referencias_robustas[i % len(referencias_robustas)]
-            
+           
         self.indice_pregunta_actual = 0
         self.mostrar_pregunta_en_pantalla()
         self.btn_evaluar.config(state="normal")
@@ -441,7 +443,7 @@ class Application:
             ans_ia = referencias_robustas[i % len(referencias_robustas)]
 
             self.txt_resultados_eval.insert(tk.END, f"Pregunta {i+1}: {self.preguntas_totales[i]}\n")
-            
+           
             if self.modo_manual:
                 if not ans_alumno:
                     relevancia_semantica = 0.0
@@ -456,7 +458,7 @@ class Application:
                     else:
                         relevancia_semantica = 70.0
                         retro = "Aceptable: Identifica el contexto general pero difiere en precisión técnica."
-                
+               
                 puntaje_total += relevancia_semantica
                 self.txt_resultados_eval.insert(tk.END, f" └ Respuesta Alumno: {ans_alumno_print}\n")
                 self.txt_resultados_eval.insert(tk.END, f" └ Referencia de la IA: {ans_ia}\n")
@@ -475,7 +477,7 @@ class Application:
             self.txt_resultados_eval.insert(tk.END, "================================================================================\n")
             self.txt_resultados_eval.insert(tk.END, "FIN DEL REPORTE AUTOMÁTICO - EXTRACTOS DE INFORMACIÓN ASEGURADOS\n")
             self.txt_resultados_eval.insert(tk.END, "================================================================================\n")
-            
+           
         # BLINDAJE: Bloqueamos la consola para que sea de SOLO LECTURA
         self.txt_resultados_eval.config(state="disabled")
 
@@ -501,25 +503,25 @@ class Application:
         self.respuestas_alumno_textos = []
         self.indice_pregunta_actual = 0
         self.modo_manual = True
-        
+       
         self.lbl_status.config(text="Esperando carga de archivo...", foreground="#777777", font=("Segoe UI", 10, "italic"))
-        
+       
         self.txt_resumen.config(state="normal")
         self.txt_resumen.delete("1.0", tk.END)
         self.txt_topics.config(state="normal")
         self.txt_topics.delete("1.0", tk.END)
-        
+       
         # Desbloqueamos consola para poder limpiarla por completo
         self.txt_resultados_eval.config(state="normal")
         self.txt_resultados_eval.delete("1.0", tk.END)
-        
+       
         self.txt_respuesta_alumno.config(state="normal", bg="#ffffff", fg="#000000", insertbackground="#000000")
         self.txt_respuesta_alumno.delete("1.0", tk.END)
         self.lbl_metrics.config(text="A la espera del procesamiento del documento fuente...")
-        
+       
         self.lbl_pregunta_num.config(text="Pregunta X de Y")
         self.lbl_pregunta_texto.config(text="Selecciona un documento para estructurar el banco de preguntas.")
-        
+       
         self.btn_guardar.config(state="disabled")
         self.btn_evaluar.config(state="disabled")
         self.btn_ia_answers.config(state="disabled")
