@@ -120,6 +120,7 @@ analiticas_lectura_inteligente_ia
 │   └── report_generator.py
 │
 └── examples/
+...
 
 ## 🛠 Tecnologías
 
