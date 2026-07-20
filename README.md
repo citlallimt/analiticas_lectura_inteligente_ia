@@ -313,19 +313,7 @@ En caso de elegir la **modalidad manual**, el usuario pasa a la pestaña **Evalu
 
 ## 📈 Estado del proyecto
 
-
-
 ✅ Proyecto de tesis finalizado.
-
-
-
-Actualmente se encuentra en proceso de documentación y organización para su publicación como portafolio profesional en GitHub.
-
-
-
-En futuras versiones se contempla incorporar nuevas funcionalidades enfocadas en analítica educativa, evaluación del aprendizaje y mejora de la interacción mediante Inteligencia Artificial.
-
-
 
 📌 Nota: Este proyecto fue desarrollado con fines académicos para la obtención del título de Ingeniería en Tecnologías de la Información en la Universidad Politecnica Metropolitana de Hidalgo . El código se comparte exclusivamente de forma pública con fines de demostración de competencias profesionales y portafolio laboral. 
 
