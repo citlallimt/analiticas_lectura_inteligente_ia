@@ -177,23 +177,62 @@ El pipeline culmina exportando los resultados analíticos a un formato limpio y 
 *   **Análisis Multilingüe y Similitud:** Registro detallado que confronta las preguntas generadas con las respuestas dadas por el usuario.
 *   **Métricas de Confianza:** Cálculo del porcentaje de **Relevancia Semántica** utilizando Sentence Transformers, permitiendo evaluar cuantitativamente el nivel de comprensión lectora o precisión conceptual alcanzada por el evaluado.
 
-  ## 🖥️ Interfaz del sistema
+  ## 🖥️ Flujo de Interacción e Interfaz del Sistema
 
-La aplicación cuenta con una interfaz gráfica que permite cargar documentos, ejecutar el análisis completo y visualizar cada una de las fases del procesamiento.
+El prototipo funcional cuenta con un flujo estructurado de interacción interactiva que combina el análisis sintáctico con la evaluación semántica adaptativa:
 
-<p align="center">
-  <img src="assets/interfazGrafica.jpeg" width="90%">
-</p>
+---
 
-## 📄 Reporte generado
-
-Al finalizar el análisis, el sistema genera automáticamente un archivo de texto (.txt) que reúne los resultados obtenidos durante todo el proceso.
-
-El reporte incluye las preguntas elaboradas automáticamente, las respuestas extraídas del documento y los indicadores de evaluación, como la puntuación de confianza y la relevancia semántica. Este recurso incrementa la portabilidad y la aplicabilidad práctica del prototipo, ya que facilita el almacenamiento, la consulta y la integración de la información en otros medios digitales o impresos.
+### 1️⃣ Inicio e Interfaz Principal
+Al ejecutar la aplicación, el usuario accede al panel principal de **Analíticas de Lectura Inteligente**. En esta etapa inicial se define la cantidad de preguntas a evaluar y el sistema queda a la espera de la carga del documento fuente.
 
 <p align="center">
-  <img src="assets/Reporte.jpeg" width="90%">
+  <img src="assets/interfazPrincipal.png" width="90%" alt="Interfaz Principal"/>
 </p>
+
+---
+
+### 2️⃣ Selección de Documento y Destino del Reporte
+El usuario selecciona el manuscrito en formato de texto (`.txt`) y especifica la carpeta de destino donde se guardará automáticamente el reporte analítico resultante.
+
+<p align="center">
+  <img src="assets/seleccionDocumento.png" width="48%" alt="Selección del archivo"/>
+  <img src="assets/rutaReporte.png" width="48%" alt="Ruta del reporte"/>
+</p>
+
+---
+
+### 3️⃣ Selección de Modalidad de Evaluación
+Finalizado el procesamiento inicial de NLP, la aplicación consulta al usuario la modalidad de evaluación: **Cuestionario Manual** (evaluación al estudiante) o **Extracción Automática por IA**.
+
+<p align="center">
+  <img src="assets/resumenModalidad.png" width="90%" alt="Modalidad de Evaluación"/>
+</p>
+
+---
+
+### 4️⃣ Análisis Sintáctico y Descriptores Temáticos
+Una vez procesado el texto, la pestaña **Resumen y Semántica** despliega las métricas cuantitativas y cualitativas del documento:
+
+<p align="center">
+  <img src="assets/resumenAnalisis.png" width="90%" alt="Análisis de Resumen y Semántica"/>
+</p>
+
+* **Síntesis Estructurada:** Generación automática del resumen ejecutivo del manuscrito.
+* **Variables Volumétricas:** Conteo de palabras totales, oraciones procesadas y caracteres.
+* **Descriptores Temáticos Clave:** Extracción de palabras clave y agrupación de tópicos probabilísticos mediante **LDA Extraction**.
+
+---
+
+### 5️⃣ Evaluación Interactiva y Validación Semántica
+Si se seleccionó la modalidad manual, la pestaña **Evaluación Interactiva** presenta los reactivos generados por la IA. El usuario ingresa sus respuestas y, al presionar **Validar Cuestionario**, el modelo **Sentence Transformers** evalúa la coherencia semántica en tiempo real.
+
+<p align="center">
+  <img src="assets/evaluacionInteractiva.png" width="90%" alt="Evaluación Interactiva y Tablero Analítico"/>
+</p>
+
+* **Módulo de Comprensión:** Presentación dinámica de preguntas y captura de respuestas del estudiante.
+* **Tablero Analítico:** Coincidencia semántica (%), comparación directa con las referencias de la IA y retroalimentación pedagógica personalizada.
 
 
 ## 📈 Estado del proyecto
