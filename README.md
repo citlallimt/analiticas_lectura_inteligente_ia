@@ -148,39 +148,6 @@ python src/main.py
 
 A continuación se detalla el comportamiento del prototipo funcional durante la carga, análisis y procesamiento semántico de un manuscrito técnico:
 
-### 🔍 Módulo 1: Análisis Descriptivo y Sintáctico del Documento
-En la primera interfaz del sistema, tras la carga del manuscrito, el pipeline de NLP extrae y segmenta de forma automatizada las métricas iniciales del texto.
-
-<img src="assets/interfazGrafica.jpeg" width="90%" alt="Análisis Sintáctico e Interfaz Principal"/>
-
-*   **Síntesis Estructurada:** Generación automática del resumen ejecutivo del documento para una comprensión rápida.
-*   **Variables Volumétricas:** Conteo preciso de palabras totales, estructuras oracionales y caracteres procesados para determinar la densidad del archivo.
-*   **Descriptores Temáticos:** Extracción de palabras clave del entorno y modelado de tópicos probabilísticos mediante la técnica **LDA Extraction**, agrupando conceptos de manera semántica.
-
----
-
-### 🧠 Módulo 2: Evaluación Interactiva y Extracción Contextual (QA)
-La segunda pestaña despliega la capa interactiva orientada a la evaluación adaptativa, utilizando modelos avanzados de QA (Question Answering).
-
-<img src="assets/interfazEvaluacion.jpeg" width="90%" alt="Módulo de Evaluación Interactiva"/>
-
-*   **Generación de Cuestionarios:** Formulación dinámica de preguntas basadas estrictamente en la información del documento (ej. *"¿Cuáles son los principales beneficios de incorporar la IA...?"*).
-*   **Tablero Analítico Interno:** Visualización en tiempo real del reporte de consulta de extractos automáticos generados por la IA, validando el origen y la veracidad de la información en el cuerpo del manuscrito para mitigar alucinaciones de los modelos de lenguaje.
-
----
-
-### 💾 Módulo 3: Serialización de Datos y Reporte Semántico (TXT/PDF)
-El pipeline culmina exportando los resultados analíticos a un formato limpio y estructurado de consumo rápido.
-
-<img src="assets/Reporte.jpeg" width="70%" alt="Visualización del archivo de salida"/>
-
-*   **Análisis Multilingüe y Similitud:** Registro detallado que confronta las preguntas generadas con las respuestas dadas por el usuario.
-*   **Métricas de Confianza:** Cálculo del porcentaje de **Relevancia Semántica** utilizando Sentence Transformers, permitiendo evaluar cuantitativamente el nivel de comprensión lectora o precisión conceptual alcanzada por el evaluado.## 🖥️ Flujo de Interacción e Interfaz del Sistema
-
-El prototipo funcional cuenta con un flujo estructurado de interacción interactiva que combina el análisis sintáctico con la evaluación semántica adaptativa:
-
----
-
 ### 1️⃣ Inicio e Interfaz Principal
 Al ejecutar la aplicación, el usuario accede al panel principal de **Analíticas de Lectura Inteligente**. En esta etapa inicial se define la cantidad de preguntas a evaluar y el sistema queda a la espera de la carga del documento fuente.
 
