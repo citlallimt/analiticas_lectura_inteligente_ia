@@ -181,23 +181,30 @@ Una vez procesado el documento, la pestaña **Resumen y Semántica** despliega i
 ---
 
 ### 4️⃣ Selección de Modalidad de Evaluación
-Tras mostrar el análisis inicial de NLP, el sistema consulta al usuario la modalidad de evaluación académica deseada: **Cuestionario Manual** (evaluación directa al estudiante) o **Extracción Automática por IA**.
+Tras mostrar el análisis sintáctico inicial, la aplicación despliega una ventana emergente para elegir cómo se resolverá la evaluación:
 
 <p align="center">
   <img src="assets/resumenModalidad.png" width="90%" alt="Modalidad de Evaluación"/>
 </p>
 
+* **Si selecciona "No" (Modo Automático):** La IA extrae y contesta de forma automatizada las respuestas basándose en el texto, procesando el análisis semántico y generando el reporte final de manera inmediata sin requerir intervención del usuario.
+* **Si selecciona "Sí" (Modo Manual / Alumno):** El sistema habilita la pestaña **Evaluación Interactiva** para que el estudiante responda los reactivos por sí mismo.
+
 ---
 
 ### 5️⃣ Evaluación Interactiva y Validación Semántica
-Si se seleccionó la modalidad manual, la pestaña **Evaluación Interactiva** presenta los reactivos generados por la IA. El usuario ingresa sus respuestas y, al presionar **Validar Cuestionario**, el modelo **Sentence Transformers** evalúa la coherencia semántica en tiempo real y genera el reporte analítico.
+En caso de elegir la **modalidad manual**, el usuario pasa a la pestaña **Evaluación Interactiva**:
+
+1. **Escritura de Respuestas:** El sistema muestra las preguntas formuladas por la IA y habilita los campos de texto para que el estudiante redacte sus propias respuestas.
+2. **Validación del Cuestionario:** Una vez contestados los reactivos, el usuario presiona el botón **Validar Cuestionario**.
+3. **Análisis Semántico y Reporte:** El modelo **Sentence Transformers** evalúa en tiempo real las respuestas ingresadas contra las referencias de la IA, calcula el porcentaje de coincidencia semántica y despliega el reporte analítico con la retroalimentación pedagógica en el tablero inferior.
 
 <p align="center">
   <img src="assets/evaluacionInteractiva.jpg" width="90%" alt="Evaluación Interactiva y Tablero Analítico"/>
 </p>
 
-* **Módulo de Comprensión:** Presentación dinámica de preguntas y captura de respuestas del estudiante.
-* **Tablero Analítico:** Coincidencia semántica (%), comparación directa con las referencias de la IA y retroalimentación pedagógica personalizada.
+* **Módulo de Comprensión:** Visualización de preguntas generadas por la IA y campo editable para captura manual del estudiante.
+* **Tablero Analítico:** Generación del reporte en pantalla tras la validación, mostrando el % de similitud semántica, contraste de respuestas y retroalimentación personalizada.
 ## 📈 Estado del proyecto
 
 ✅ Proyecto de tesis finalizado.
