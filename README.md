@@ -122,36 +122,30 @@ analiticas_lectura_inteligente_ia
 └── examples/
 ...
 
-## 🛠 Tecnologías
+---
 
+## 🛠️ Tecnologías y Herramientas Utilizadas
 
+<div align="center">
 
-- Python
+| Categoría | Tecnologías / Librerías |
+| :--- | :--- |
+| **Lenguaje Principal** | ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) |
+| **Core NLP & ML** | ![HuggingFace](https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black) ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white) ![spaCy](https://img.shields.io/badge/spaCy-09A3D5?style=for-the-badge&logo=spacy&logoColor=white) |
+| **Modelos Especificos** | **Sentence Transformers**, **T5**, **RoBERTa QA**, **YAKE**, **LDA** |
+| **Entornos y Herramientas** | ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![Anaconda](https://img.shields.io/badge/Anaconda-44A833?style=for-the-badge&logo=anaconda&logoColor=white) ![Google Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white) |
 
-- VS Code
+</div>
 
-- Anaconda
+---
 
-- Spyder
+## ⚙️ Instalación y Configuración
 
-- Google Colab
+Sigue estos pasos para clonar y ejecutar el entorno de desarrollo localmente:
 
-- Hugging Face
-
-- PyTorch
-
-## ⚙️ Instalación
-
-
-
-Clonar el repositorio
-
-
-
-```bash
-
-git clone https://github.com/citlallimt/analiticas_lectura_inteligente_ia.git
-
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/citlallimt/analiticas_lectura_inteligente_ia.git](https://github.com/citlallimt/analiticas_lectura_inteligente_ia.git)
 ```
 
 
